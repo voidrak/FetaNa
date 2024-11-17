@@ -17,6 +17,7 @@ export default {
         "bg-tan": "#f6f2e9",
         "bg-dark-green": "#003d29",
         "bg-light-green": "#9ee76f",
+        "blue-accent": "#338eee",
       },
     },
   },

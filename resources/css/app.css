@@ -4,6 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  /* font-family: "Ultra"; */
+body {
+  background-color: #f6f2e9;
 }

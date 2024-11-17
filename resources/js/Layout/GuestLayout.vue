@@ -1,6 +1,5 @@
 <script setup>
 import Heading from "../Components/Heading/Heading.vue";
-import SmallNav from "../Components/Heading/SmallNav.vue";
 </script>
 
 <template>
