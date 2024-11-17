@@ -6,7 +6,7 @@ defineProps({
 
 <template>
   <div
-    class="absolute left-0 top-0 h-screen w-full max-w-[450px] items-center bg-blue-accent pt-8 duration-500 ease-linear md:hidden"
+    class="absolute left-0 top-0 z-50 h-screen w-full max-w-[450px] items-center bg-blue-accent pt-8 duration-500 ease-linear md:hidden"
     :class="[`${isSideOpen ? `` : `w-0 w-[0px]`}`]"
   >
     <div
@@ -24,7 +24,10 @@ defineProps({
         />
       </svg>
     </div>
-    <div class="mt-24 flex flex-col px-8">
+    <div
+      :class="[`${isSideOpen ? `` : `hidden`}`]"
+      class="mt-24 flex flex-col px-8"
+    >
       <div class="mb-16 space-y-4">
         <div class="flex items-center gap-x-2 text-white">
           <svg

@@ -11,10 +11,12 @@ const toggleSideBar = () => {
 </script>
 
 <template>
-  <div class="grid min-h-screen w-full grid-cols-10 bg-bg-tan lg:flex">
+  <div
+    class="grid h-screen w-full grid-cols-10 overflow-y-hidden bg-bg-tan font-DMSans lg:flex"
+  >
     <LargeSideBar />
 
-    <div class="inside col-span-10 w-full md:col-span-7">
+    <div class="inside col-span-10 w-full overflow-auto md:col-span-7">
       <!-- heading -->
       <div class="border-y border-gray-400">
         <div class="hidden items-center px-4 py-5 md:flex">
@@ -49,7 +51,7 @@ const toggleSideBar = () => {
             </svg>
           </div>
         </div>
-        <div class="flex items-center justify-between px-3 py-2 md:hidden">
+        <div class="flex items-center justify-between p-3 md:hidden">
           <SmallSideBar :isSideOpen="isSideOpen" @close="toggleSideBar" />
           <div
             @click="toggleSideBar"
@@ -71,7 +73,7 @@ const toggleSideBar = () => {
           </div>
         </div>
       </div>
-      <slot>Home</slot>
+      <slot> </slot>
     </div>
   </div>
 </template>

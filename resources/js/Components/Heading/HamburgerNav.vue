@@ -6,7 +6,7 @@ defineProps({
 
 <template>
   <div
-    class="absolute right-0 top-0 flex h-screen w-full max-w-[450px] flex-col items-center justify-center gap-y-8 bg-black pt-8 duration-500 ease-linear md:hidden"
+    class="absolute right-0 top-0 z-50 flex h-screen w-full max-w-[450px] flex-col items-center justify-center gap-y-8 bg-black pt-8 duration-500 ease-linear md:hidden"
     :class="[`${isSideOpen ? `` : `w-[0px]`}`]"
   >
     <div
