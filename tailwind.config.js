@@ -19,6 +19,9 @@ export default {
         "bg-light-green": "#9ee76f",
         "blue-accent": "#338eee",
       },
+      screens: {
+        mlg: "425px",
+      },
     },
   },
   plugins: [],

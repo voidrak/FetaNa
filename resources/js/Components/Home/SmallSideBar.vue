@@ -7,7 +7,7 @@ defineProps({
 <template>
   <div
     class="absolute left-0 top-0 z-50 h-screen w-full max-w-[450px] items-center bg-blue-accent pt-8 duration-500 ease-linear md:hidden"
-    :class="[`${isSideOpen ? `` : `w-0 w-[0px]`}`]"
+    :class="[`${isSideOpen ? `` : `hidden w-0 w-[0px]`}`]"
   >
     <div
       @click="$emit('close')"
