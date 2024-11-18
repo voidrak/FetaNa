@@ -12,3 +12,6 @@ Route::get('/home', function () {
 Route::get('/SoftwareEngineering', function () {
     return Inertia::render('ProgramPage/ProgramPage');
 });
+Route::get('/SoftwareEngineering/WebDesignedProgramming', function () {
+    return Inertia::render('CoursePage/CoursePage');
+});
