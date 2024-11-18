@@ -6,16 +6,22 @@ import CourseCard from "./CourseCard.vue";
 <template>
   <AuthenticatedLayout>
     <div class="px-2 py-8">
-      <div class="mlg:my-8 px-4">
-        <h1 class="text-3xl">Exit Exam for</h1>
-        <h1 class="text-nowrap text-3xl font-semibold text-bg-light-green">
+      <div class="mlg:my-8 items-center gap-x-4 px-4 lg:flex xl:ml-12">
+        <h1 class="text-3xl lg:text-4xl xl:text-5xl">Exit Exam for</h1>
+        <h1
+          class="text-nowrap text-3xl font-semibold text-bg-light-green lg:text-4xl xl:text-5xl"
+        >
           Software Engineering
         </h1>
       </div>
-      <div class="mt-6 flex items-center justify-center gap-x-4">
+      <div
+        class="mt-6 flex items-center justify-center gap-x-4 lg:justify-normal lg:px-10 xl:ml-16"
+      >
         <h1 class="text-xl">Select Course</h1>
+        <h1 class="text-xl">Or</h1>
+
         <div
-          class="flex items-center gap-x-1 rounded-2xl bg-bg-light-green px-3 py-1"
+          class="flex cursor-pointer items-center gap-x-1 rounded-2xl bg-bg-light-green px-3 py-2"
         >
           <p class="text-sm">Mix Courses</p>
           <svg
@@ -29,7 +35,7 @@ import CourseCard from "./CourseCard.vue";
           </svg>
         </div>
       </div>
-      <div class="mt-12 grid gap-y-4 lg:grid-cols-2">
+      <div class="mt-12 grid gap-y-4 lg:grid-cols-2 2xl:grid-cols-3">
         <CourseCard
           ProgramTitle="Software Testing, Verification and Quality Assurance"
         >

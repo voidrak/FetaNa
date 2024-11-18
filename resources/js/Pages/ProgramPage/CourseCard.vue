@@ -35,7 +35,7 @@ const colorCombination = [
 <template>
   <div
     :style="{ backgroundColor: cardBgColor }"
-    class="mx-auto flex w-[80%] items-center gap-x-2 rounded-lg px-2 py-6 shadow-sm"
+    class="mx-auto flex w-[80%] cursor-pointer items-center gap-x-2 rounded-sm px-2 py-6 shadow-lg lg:hover:scale-105"
   >
     <div
       :style="{ backgroundColor: svgBgColor, borderColor: svgFillColor }"
