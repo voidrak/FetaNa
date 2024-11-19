@@ -1,11 +1,12 @@
 <script setup>
 import GuestLayout from "../Layout/GuestLayout.vue";
+import ziggy from "/public/image/ziggy.png";
 </script>
 
 <template>
   <GuestLayout>
     <div
-      class="mx-auto grid h-[calc(100vh-90px)] items-center justify-center px-4 py-6"
+      class="relative mx-auto grid h-[calc(100vh-90px)] items-center justify-center px-4 py-6"
     >
       <div
         class="max-w-md rounded-lg border border-gray-300 p-6 shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-md:mx-auto"

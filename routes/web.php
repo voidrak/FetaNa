@@ -18,3 +18,6 @@ Route::get('/SoftwareEngineering/WebDesignedProgramming', function () {
 Route::get('/login', function () {
     return Inertia::render('LoginPage');
 });
+Route::get('/register', function () {
+    return Inertia::render('RegisterPage');
+});
