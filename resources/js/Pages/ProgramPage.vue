@@ -1,12 +1,12 @@
 <script setup>
-import AuthenticatedLayout from "../../Layout/AuthenticatedLayout.vue";
-import CourseCard from "./CourseCard.vue";
+import CourseCard from "../Components/ProgramPage/CourseCard.vue";
+import AuthenticatedLayout from "../Layout/AuthenticatedLayout.vue";
 </script>
 
 <template>
   <AuthenticatedLayout>
     <div class="px-2 py-8">
-      <div class="mlg:my-8 items-center gap-x-4 px-4 lg:flex xl:ml-12">
+      <div class="items-center gap-x-4 px-4 mlg:my-8 lg:flex xl:ml-12">
         <h1 class="text-3xl lg:text-4xl xl:text-5xl">Exit Exam for</h1>
         <h1
           class="text-nowrap text-3xl font-semibold text-bg-light-green lg:text-4xl xl:text-5xl"
@@ -35,6 +35,7 @@ import CourseCard from "./CourseCard.vue";
           </svg>
         </div>
       </div>
+
       <div class="mt-12 grid gap-y-4 lg:grid-cols-2 2xl:grid-cols-3">
         <CourseCard
           ProgramTitle="Software Testing, Verification and Quality Assurance"

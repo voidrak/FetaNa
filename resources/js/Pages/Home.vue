@@ -1,6 +1,6 @@
 <script setup>
-import ProgramCard from "../../Components/Home/ProgramCard.vue";
-import AuthenticatedLayout from "../../Layout/AuthenticatedLayout.vue";
+import ProgramCard from "../Components/Home/ProgramCard.vue";
+import AuthenticatedLayout from "../Layout/AuthenticatedLayout.vue";
 import graduationCap from "/public/image/graduationCap.png";
 import homePattern from "/public/image/home-bottom-pattern.png";
 </script>

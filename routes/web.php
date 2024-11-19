@@ -7,11 +7,14 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 });
 Route::get('/home', function () {
-    return Inertia::render('Home/Home');
+    return Inertia::render('Home');
 });
 Route::get('/SoftwareEngineering', function () {
-    return Inertia::render('ProgramPage/ProgramPage');
+    return Inertia::render('ProgramPage');
 });
 Route::get('/SoftwareEngineering/WebDesignedProgramming', function () {
-    return Inertia::render('CoursePage/CoursePage');
+    return Inertia::render('CoursePage');
+});
+Route::get('/login', function () {
+    return Inertia::render('LoginPage');
 });
