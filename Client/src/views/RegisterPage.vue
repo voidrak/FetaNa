@@ -18,7 +18,7 @@ import Logo from "/public/FetaNaLogo.png";
         <form>
           <div class="space-y-6">
             <div>
-              <label class="mb-2 block text-sm text-gray-800">First Name</label>
+              <label class="mb-2 block text-sm text-gray-800">Full Name</label>
               <input
                 name="name"
                 type="text"
@@ -49,7 +49,7 @@ import Logo from "/public/FetaNaLogo.png";
                 >Confirm Password</label
               >
               <input
-                name="cpassword"
+                name="password_confirmation"
                 type="password"
                 class="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 outline-bg-light-green"
                 placeholder="Enter confirm password"
