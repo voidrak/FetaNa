@@ -35,6 +35,33 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
+
+    public function programs()
+    {
+        return $this->hasMany(Program::class, 'created_by');
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'created_by');
+    }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class, 'created_by');
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class, "created_by");
+    }
+
+    public function bugs()
+    {
+        return $this->hasMany(Bug::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
