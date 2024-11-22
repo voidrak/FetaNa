@@ -2,8 +2,8 @@
 import { ref } from "vue";
 const isSideOpen = ref(false);
 import Logo from "/public/FetaNaLogo.png";
-import SmallSideBar from "../Components/Home/SmallSideBar.vue";
-import LargeSideBar from "../Components/Home/LargeSideBar.vue";
+import SmallSideBar from "@/Components/Home/SmallSideBar.vue";
+import LargeSideBar from "@/Components/Home/LargeSideBar.vue";
 
 const toggleSideBar = () => {
   isSideOpen.value = !isSideOpen.value;

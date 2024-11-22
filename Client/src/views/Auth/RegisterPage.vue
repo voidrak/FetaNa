@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from "vue";
-import GuestLayout from "../../Layout/GuestLayout.vue";
+import GuestLayout from "@/Layout/GuestLayout.vue";
 import Logo from "/public/FetaNaLogo.png";
 
 const formData = reactive({

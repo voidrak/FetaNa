@@ -1,5 +1,5 @@
 <script setup ">
-import GuestLayout from "../Layout/GuestLayout.vue";
+import GuestLayout from "@/Layout/GuestLayout.vue";
 import HomeLandingImage from "/public/image/HomeLandingImageEllipse.webp";
 </script>
 

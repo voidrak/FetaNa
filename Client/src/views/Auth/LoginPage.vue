@@ -1,5 +1,5 @@
 <script setup>
-import GuestLayout from "../../Layout/GuestLayout.vue";
+import GuestLayout from "@/Layout/GuestLayout.vue";
 import ziggy from "/public/image/ziggy.png";
 </script>
 

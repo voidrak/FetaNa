@@ -1,6 +1,6 @@
 <script setup>
-import CourseCard from "../Components/ProgramPage/CourseCard.vue";
-import AuthenticatedLayout from "../Layout/AuthenticatedLayout.vue";
+import CourseCard from "@/Components/ProgramPage/CourseCard.vue";
+import AuthenticatedLayout from "@/Layout/AuthenticatedLayout.vue";
 </script>
 
 <template>
