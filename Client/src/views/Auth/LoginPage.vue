@@ -1,6 +1,18 @@
 <script setup>
 import GuestLayout from "@/Layout/GuestLayout.vue";
-import ziggy from "/public/image/ziggy.png";
+import { reactive } from "vue";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
+
+const formData = reactive({
+  email: "",
+  password: "",
+});
+
+const submitForm = () => {
+  authStore.authenticate("login", formData);
+};
 </script>
 
 <template>
@@ -11,7 +23,7 @@ import ziggy from "/public/image/ziggy.png";
       <div
         class="max-w-md rounded-lg border border-gray-300 p-6 shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-md:mx-auto"
       >
-        <form class="space-y-4">
+        <form @submit.prevent="submitForm" class="space-y-4">
           <div class="mb-8">
             <h3 class="text-3xl font-extrabold text-gray-800">Sign in</h3>
             <p class="mt-4 text-sm leading-relaxed text-gray-500">
@@ -21,15 +33,18 @@ import ziggy from "/public/image/ziggy.png";
           </div>
 
           <div>
-            <label class="mb-2 block text-sm text-gray-800">User name</label>
+            <label for="email" class="mb-2 block text-sm text-gray-800"
+              >Email</label
+            >
             <div class="relative flex items-center">
               <input
-                name="username"
-                s
-                type="text"
-                required
-                class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-800 outline-blue-600"
-                placeholder="Enter user name"
+                v-model="formData.email"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                class="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 outline-bg-light-green"
+                placeholder="Enter email"
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,15 +60,22 @@ import ziggy from "/public/image/ziggy.png";
                 ></path>
               </svg>
             </div>
+            <p v-if="authStore.errors.email" class="text-sm text-red-500">
+              {{ authStore.errors.email }}
+            </p>
           </div>
           <div>
-            <label class="mb-2 block text-sm text-gray-800">Password</label>
+            <label for="password" class="mb-2 block text-sm text-gray-800"
+              >Password</label
+            >
             <div class="relative flex items-center">
               <input
+                v-model="formData.password"
+                id="password"
                 name="password"
                 type="password"
-                required
-                class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-800 outline-blue-600"
+                autocomplete="new-password"
+                class="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 outline-bg-light-green"
                 placeholder="Enter password"
               />
               <svg
@@ -69,21 +91,12 @@ import ziggy from "/public/image/ziggy.png";
                 ></path>
               </svg>
             </div>
+            <p v-if="authStore.errors.password" class="text-sm text-red-500">
+              {{ authStore.errors.password[0] }}
+            </p>
           </div>
 
-          <div class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                class="h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-              />
-              <label for="remember-me" class="ml-3 block text-sm text-gray-800">
-                Remember me
-              </label>
-            </div>
-
+          <div class="flex flex-wrap items-center justify-end gap-4">
             <div class="text-sm">
               <a
                 href="jajvascript:void(0);"
@@ -96,21 +109,22 @@ import ziggy from "/public/image/ziggy.png";
 
           <div class="!mt-8">
             <button
-              type="button"
+              type="submit"
               class="w-full rounded-lg bg-blue-600 px-4 py-3 text-sm tracking-wide text-white shadow-xl hover:bg-blue-700 focus:outline-none"
             >
               Log in
             </button>
           </div>
 
-          <p class="!mt-8 text-center text-sm text-gray-800">
-            Don't have an account
-            <a
-              href="javascript:void(0);"
-              class="ml-1 whitespace-nowrap font-semibold text-blue-600 hover:underline"
-              >Register here</a
-            >
-          </p>
+          <RouterLink :to="{ name: 'Register' }">
+            <p class="!mt-8 text-center text-sm text-gray-800">
+              Do have an account
+              <span
+                class="ml-1 whitespace-nowrap font-semibold text-blue-600 hover:underline"
+                >Register here
+              </span>
+            </p>
+          </RouterLink>
         </form>
       </div>
     </div>

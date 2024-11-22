@@ -13,7 +13,6 @@ const formData = reactive({
   password_confirmation: "",
 });
 
-// Define the submitForm method
 const submitForm = () => {
   authStore.authenticate("register", formData);
 };
@@ -115,6 +114,16 @@ const submitForm = () => {
                 Register
               </button>
             </div>
+
+            <RouterLink :to="{ name: 'Login' }">
+              <p class="!mt-8 text-center text-sm text-gray-800">
+                Do have an account
+                <span
+                  class="ml-1 whitespace-nowrap font-semibold text-blue-600 hover:underline"
+                  >Login here
+                </span>
+              </p>
+            </RouterLink>
           </div>
         </form>
       </div>

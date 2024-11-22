@@ -43,5 +43,7 @@ export const useAuthStore = defineStore("authStore", {
         this.router.push({ name: "home" });
       }
     },
+
+    /**************** Logout  ***************/
   },
 });

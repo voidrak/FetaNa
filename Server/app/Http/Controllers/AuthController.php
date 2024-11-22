@@ -33,7 +33,11 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return ['message' => 'Invalid credentials'];
+            return [
+                'errors' => [
+                    'email' => 'Invalid credentials',
+                ]
+            ];
         };
 
         $token = $user->createToken($user->name);
