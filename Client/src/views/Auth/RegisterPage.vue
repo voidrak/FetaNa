@@ -1,11 +1,12 @@
 <script setup>
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import GuestLayout from "@/Layout/GuestLayout.vue";
 import Logo from "/public/FetaNaLogo.png";
 import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
 
 const authStore = useAuthStore();
-
+const { errors } = storeToRefs(useAuthStore());
 const formData = reactive({
   name: "",
   email: "",
@@ -16,6 +17,8 @@ const formData = reactive({
 const submitForm = () => {
   authStore.authenticate("register", formData);
 };
+
+onMounted(() => (errors.value = {}));
 </script>
 
 <template>
@@ -45,8 +48,8 @@ const submitForm = () => {
                 class="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 outline-bg-light-green"
                 placeholder="Enter name"
               />
-              <p v-if="authStore.errors.name" class="text-sm text-red-500">
-                {{ authStore.errors.name[0] }}
+              <p v-if="errors.name" class="text-sm text-red-500">
+                {{ errors.name[0] }}
               </p>
             </div>
             <div>
@@ -62,8 +65,8 @@ const submitForm = () => {
                 class="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 outline-bg-light-green"
                 placeholder="Enter email"
               />
-              <p v-if="authStore.errors.email" class="text-sm text-red-500">
-                {{ authStore.errors.email[0] }}
+              <p v-if="errors.email" class="text-sm text-red-500">
+                {{ errors.email[0] }}
               </p>
             </div>
             <div>
@@ -79,8 +82,8 @@ const submitForm = () => {
                 class="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 outline-bg-light-green"
                 placeholder="Enter password"
               />
-              <p v-if="authStore.errors.password" class="text-sm text-red-500">
-                {{ authStore.errors.password[0] }}
+              <p v-if="errors.password" class="text-sm text-red-500">
+                {{ errors.password[0] }}
               </p>
             </div>
             <div>
@@ -100,10 +103,10 @@ const submitForm = () => {
               />
 
               <p
-                v-if="authStore.errors.password_confirmation"
+                v-if="errors.password_confirmation"
                 class="text-sm text-red-500"
               >
-                {{ authStore.errors.password_confirmation[0] }}
+                {{ errors.password_confirmation[0] }}
               </p>
             </div>
             <div>

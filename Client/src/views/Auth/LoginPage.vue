@@ -1,9 +1,11 @@
 <script setup>
 import GuestLayout from "@/Layout/GuestLayout.vue";
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
 
 const authStore = useAuthStore();
+const { errors } = storeToRefs(useAuthStore());
 
 const formData = reactive({
   email: "",
@@ -13,6 +15,8 @@ const formData = reactive({
 const submitForm = () => {
   authStore.authenticate("login", formData);
 };
+
+onMounted(() => (errors.value = {}));
 </script>
 
 <template>
@@ -60,8 +64,8 @@ const submitForm = () => {
                 ></path>
               </svg>
             </div>
-            <p v-if="authStore.errors.email" class="text-sm text-red-500">
-              {{ authStore.errors.email }}
+            <p v-if="errors.email" class="text-sm text-red-500">
+              {{ errors.email }}
             </p>
           </div>
           <div>
@@ -91,8 +95,8 @@ const submitForm = () => {
                 ></path>
               </svg>
             </div>
-            <p v-if="authStore.errors.password" class="text-sm text-red-500">
-              {{ authStore.errors.password[0] }}
+            <p v-if="errors.password" class="text-sm text-red-500">
+              {{ errors.password[0] }}
             </p>
           </div>
 
