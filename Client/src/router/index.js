@@ -21,12 +21,12 @@ const router = createRouter({
     },
     {
       path: "/SoftwareEngineering",
-      name: "Program Page",
+      name: "ProgramPage",
       component: ProgramPage,
     },
     {
       path: "/webdesign",
-      name: "Course Page",
+      name: "CoursePage",
       component: CoursePage,
     },
     {

@@ -2,6 +2,9 @@
 import { reactive } from "vue";
 import GuestLayout from "@/Layout/GuestLayout.vue";
 import Logo from "/public/FetaNaLogo.png";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
 
 const formData = reactive({
   name: "",
@@ -9,6 +12,11 @@ const formData = reactive({
   password: "",
   password_confirmation: "",
 });
+
+// Define the submitForm method
+const submitForm = () => {
+  authStore.authenticate("register", formData);
+};
 </script>
 
 <template>
@@ -23,7 +31,7 @@ const formData = reactive({
           <img :src="Logo" alt="logo" class="inline-block w-40" />
         </div>
 
-        <form @submit.prevent="console.log(formData)">
+        <form @submit.prevent="submitForm">
           <div class="space-y-6">
             <div>
               <label for="name" class="mb-2 block text-sm text-gray-800"
@@ -38,20 +46,26 @@ const formData = reactive({
                 class="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 outline-bg-light-green"
                 placeholder="Enter name"
               />
+              <p v-if="authStore.errors.name" class="text-sm text-red-500">
+                {{ authStore.errors.name[0] }}
+              </p>
             </div>
             <div>
               <label for="email" class="mb-2 block text-sm text-gray-800"
-                >Email
-              </label>
+                >Email</label
+              >
               <input
                 v-model="formData.email"
                 id="email"
                 name="email"
-                type="text"
+                type="email"
                 autocomplete="email"
                 class="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 outline-bg-light-green"
                 placeholder="Enter email"
               />
+              <p v-if="authStore.errors.email" class="text-sm text-red-500">
+                {{ authStore.errors.email[0] }}
+              </p>
             </div>
             <div>
               <label for="password" class="mb-2 block text-sm text-gray-800"
@@ -66,6 +80,9 @@ const formData = reactive({
                 class="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 outline-bg-light-green"
                 placeholder="Enter password"
               />
+              <p v-if="authStore.errors.password" class="text-sm text-red-500">
+                {{ authStore.errors.password[0] }}
+              </p>
             </div>
             <div>
               <label
@@ -80,27 +97,25 @@ const formData = reactive({
                 type="password"
                 autocomplete="new-password"
                 class="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 outline-bg-light-green"
-                placeholder="Enter confirm password"
+                placeholder="Confirm password"
               />
+
+              <p
+                v-if="authStore.errors.password_confirmation"
+                class="text-sm text-red-500"
+              >
+                {{ authStore.errors.password_confirmation[0] }}
+              </p>
+            </div>
+            <div>
+              <button
+                type="submit"
+                class="w-full rounded-md bg-blue-500 p-2 text-white"
+              >
+                Register
+              </button>
             </div>
           </div>
-
-          <div class="!mt-12">
-            <button
-              type="submit"
-              class="w-full rounded-md bg-blue-600 px-4 py-3 text-sm font-semibold tracking-wider text-white hover:bg-blue-700 focus:outline-none"
-            >
-              Create an account
-            </button>
-          </div>
-          <p class="mt-6 text-center text-sm text-gray-800">
-            Already have an account?
-            <a
-              href="javascript:void(0);"
-              class="ml-1 font-semibold text-blue-600 hover:underline"
-              >Login here</a
-            >
-          </p>
         </form>
       </div>
     </div>

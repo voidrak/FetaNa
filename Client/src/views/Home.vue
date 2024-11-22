@@ -3,6 +3,9 @@ import ProgramCard from "@/Components/Home/ProgramCard.vue";
 import AuthenticatedLayout from "@/Layout/AuthenticatedLayout.vue";
 import graduationCap from "/public/image/graduationCap.png";
 import homePattern from "/public/image/home-bottom-pattern.png";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -12,7 +15,9 @@ import homePattern from "/public/image/home-bottom-pattern.png";
         <div class="text-nowrap">
           <h1 class="mb-4 text-3xl sm:text-5xl md:text-6xl">
             Welcome ,
-            <span class="font-bold text-bg-light-green">Rak</span>
+            <span v-if="authStore.user" class="font-bold text-bg-light-green">{{
+              authStore.user.name
+            }}</span>
           </h1>
           <h2 class="text-xl sm:text-2xl md:text-3xl">Choose Your Program</h2>
         </div>

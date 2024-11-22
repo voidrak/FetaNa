@@ -6,9 +6,12 @@ import Logo from "/public/FetaNaLogo.png";
   <div
     class="sidebar lg relative col-span-3 hidden flex-col justify-center rounded-br-[50px] rounded-tr-[50px] bg-blue-accent px-4 md:flex lg:w-[330px]"
   >
-    <div class="logo absolute left-5 top-10">
-      <img :src="Logo" alt="FetaNa Logo" class="w-[150px]" />
-    </div>
+    <RouterLink :to="{ name: 'welcome' }">
+      <div class="logo absolute left-5 top-10">
+        <img :src="Logo" alt="FetaNa Logo" class="w-[150px]" />
+      </div>
+    </RouterLink>
+
     <div class="mb-24 space-y-6">
       <div class="flex items-center gap-x-3 text-white">
         <svg
