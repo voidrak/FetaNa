@@ -1,5 +1,8 @@
 <script setup>
+import { useAuthStore } from "@/stores/auth";
 import Logo from "/public/FetaNaLogo.png";
+
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -76,8 +79,8 @@ import Logo from "/public/FetaNaLogo.png";
           />
         </svg>
         <div class="">
-          <form class="">
-            <button class="nav-link">Log out</button>
+          <form @submit.prevent="authStore.logout" class="">
+            <button class="">Log out</button>
           </form>
         </div>
       </div>

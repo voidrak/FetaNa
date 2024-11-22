@@ -106,8 +106,8 @@ defineProps({
             />
           </svg>
           <div class="">
-            <form class="">
-              <button class="nav-link">Log out</button>
+            <form @submit.prevent="authStore.logout" class="">
+              <button class="">Log out</button>
             </form>
           </div>
         </div>
