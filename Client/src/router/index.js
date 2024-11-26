@@ -6,6 +6,7 @@ import CoursePage from "@/views/CoursePage.vue";
 import LoginPage from "@/views/Auth/LoginPage.vue";
 import RegisterPage from "@/views/Auth/RegisterPage.vue";
 import { useAuthStore } from "@/stores/auth";
+import TestUi from "@/Components/Ui/TestUi.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,12 @@ const router = createRouter({
       path: "/webdesign",
       name: "CoursePage",
       component: CoursePage,
+      meta: { auth: true },
+    },
+    {
+      path: "/testUi",
+      name: "TestUi",
+      component: TestUi,
       meta: { auth: true },
     },
   ],
