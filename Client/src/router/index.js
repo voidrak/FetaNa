@@ -7,6 +7,7 @@ import LoginPage from "@/views/Auth/LoginPage.vue";
 import RegisterPage from "@/views/Auth/RegisterPage.vue";
 import { useAuthStore } from "@/stores/auth";
 import TestUi from "@/Components/Ui/TestUi.vue";
+import AdminHome from "@/views/Admin/AdminHome.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,6 +50,12 @@ const router = createRouter({
       meta: { auth: true },
     },
     {
+      path: "/admin",
+      name: "adminHome",
+      component: AdminHome,
+      meta: { admin: true },
+    },
+    {
       path: "/testUi",
       name: "TestUi",
       component: TestUi,
@@ -60,6 +67,13 @@ const router = createRouter({
 router.beforeEach(async (to, from) => {
   const authStore = useAuthStore();
   await authStore.getUser();
+
+  if (authStore.user?.role === "admin" && to.meta.guest) {
+    return { name: "adminHome" };
+  }
+  if (authStore.user?.role === "admin" && to.meta.auth) {
+    return { name: "adminHome" };
+  }
   if (authStore.user && to.meta.guest) {
     return { name: "home" };
   }

@@ -12,6 +12,8 @@ const toggleSideBar = () => {
 };
 
 const authStore = useAuthStore();
+
+console.log(authStore.user);
 </script>
 
 <template>
