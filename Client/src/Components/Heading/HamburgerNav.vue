@@ -1,7 +1,10 @@
 <script setup>
+import { useAuthStore } from "@/stores/auth";
+
 defineProps({
   isSideOpen: Boolean,
 });
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -32,9 +35,11 @@ defineProps({
       <li class="">About Us</li>
       <li class="">Contact Us</li>
       <li class="">Github</li>
+      <li v-if="authStore.user" class="">Profile</li>
     </ul>
 
     <div
+      v-if="!authStore.user"
       :class="[`${isSideOpen ? `` : `hidden`}`]"
       class="flex w-[150px] items-center justify-center gap-x-2 rounded-xl bg-bg-light-green p-2"
     >
