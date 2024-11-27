@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Choice;
-use App\Http\Requests\StoreChoiceRequest;
-use App\Http\Requests\UpdateChoiceRequest;
+use Illuminate\Http\Request;
+
 
 class ChoiceController extends Controller
 {
@@ -19,7 +19,7 @@ class ChoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreChoiceRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class ChoiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateChoiceRequest $request, Choice $choice)
+    public function update(Request $request, Choice $choice)
     {
         //
     }

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
-use App\Http\Requests\StoreNoteRequest;
-use App\Http\Requests\UpdateNoteRequest;
+use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
@@ -19,7 +18,7 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreNoteRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +34,7 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNoteRequest $request, Note $note)
+    public function update(Request $request, Note $note)
     {
         //
     }
