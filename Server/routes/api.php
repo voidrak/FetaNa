@@ -16,12 +16,22 @@ Route::get('/', function () {
 });
 
 
+// ProgramController
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/programs', [ProgramController::class, 'index']);
     Route::get('/programs/{program}', [ProgramController::class, 'show']);
     Route::post('/programs', [ProgramController::class, 'store'])->middleware(AdminMiddleware::class);
     Route::put('/programs/{program}', [ProgramController::class, 'update'])->middleware(AdminMiddleware::class);
     Route::delete('/programs/{program}', [ProgramController::class, 'destroy'])->middleware(AdminMiddleware::class);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/courses', [CourseController::class, 'index']);
+    Route::get('/courses/{course}', [CourseController::class, 'show']);
+    Route::post('/courses', [CourseController::class, 'store'])->middleware(AdminMiddleware::class);
+    Route::put('/courses/{course}', [CourseController::class, 'update'])->middleware(AdminMiddleware::class);
+    Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->middleware(AdminMiddleware::class);
 });
 
 
