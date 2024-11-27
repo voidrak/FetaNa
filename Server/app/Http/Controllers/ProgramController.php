@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Program;
-use App\Http\Requests\StoreProgramRequest;
-use App\Http\Requests\UpdateProgramRequest;
+
+use App\Models\Course;
+use Illuminate\Http\Request;
 
 class ProgramController extends Controller
 {
@@ -19,9 +20,14 @@ class ProgramController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProgramRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required | unique:programs',
+        ]);
+
+        $program = $request->user()->programs()->create($validate);
+        return ['course' => $program];
     }
 
     /**
@@ -35,7 +41,7 @@ class ProgramController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProgramRequest $request, Program $program)
+    public function update(Request $request, Program $program)
     {
         //
     }
