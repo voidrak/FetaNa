@@ -12,7 +12,8 @@ class ProgramController extends Controller
 
     public function index()
     {
-        //
+        $programs = Program::all();
+        return ["programs" => $programs];
     }
 
     public function store(Request $request)
@@ -27,16 +28,23 @@ class ProgramController extends Controller
 
     public function show(Program $program)
     {
-        //
+        return ['program' => $program];
     }
 
     public function update(Request $request, Program $program)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required | unique:programs',
+        ]);
+
+        $program->update($validate);
+
+        return ['program' => $program];
     }
 
     public function destroy(Program $program)
     {
-        //
+        $program->delete();
+        return ["message" => "deleted successfully"];
     }
 }
