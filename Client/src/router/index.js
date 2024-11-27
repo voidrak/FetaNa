@@ -68,12 +68,12 @@ router.beforeEach(async (to, from) => {
   const authStore = useAuthStore();
   await authStore.getUser();
 
-  if (authStore.user?.role === "admin" && to.meta.guest) {
-    return { name: "adminHome" };
-  }
-  if (authStore.user?.role === "admin" && to.meta.auth) {
-    return { name: "adminHome" };
-  }
+  // if (authStore.user?.role === "admin" && to.meta.guest) {
+  //   return { name: "adminHome" };
+  // }
+  // if (authStore.user?.role === "admin" && to.meta.auth) {
+  //   return { name: "adminHome" };
+  // }
   if (authStore.user && to.meta.guest) {
     return { name: "home" };
   }

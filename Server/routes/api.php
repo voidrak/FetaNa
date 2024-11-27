@@ -16,9 +16,12 @@ Route::get('/', function () {
 });
 
 
-Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function () {
-    Route::apiResource('programs', ProgramController::class);
-    Route::apiResource('courses', CourseController::class);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/programs', [ProgramController::class, 'index']);
+    Route::get('/programs/{program}', [ProgramController::class, 'show']);
+    Route::post('/programs', [ProgramController::class, 'store'])->middleware(AdminMiddleware::class);
+    Route::put('/programs/{program}', [ProgramController::class, 'update'])->middleware(AdminMiddleware::class);
+    Route::delete('/programs/{program}', [ProgramController::class, 'destroy'])->middleware(AdminMiddleware::class);
 });
 
 
