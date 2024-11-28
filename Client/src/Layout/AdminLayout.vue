@@ -24,7 +24,11 @@ const toggleSideBar = () => {
       <!-- heading -->
       <div class="border-y border-gray-400">
         <div class="hidden items-center justify-center px-4 py-5 md:flex">
-          <h1 class="text-2xl text-center font-semibold">Admin Dashboard</h1>
+          <h1
+            class="text-2xl text-center font-Montserrat text-bg-dark-green xl:text-3xl font-bold"
+          >
+            Admin Dashboard
+          </h1>
         </div>
         <div class="flex items-center justify-between p-3 md:hidden">
           <AdminSmallSideBar :isSideOpen="isSideOpen" @close="toggleSideBar" />

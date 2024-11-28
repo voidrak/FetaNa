@@ -32,7 +32,7 @@ const authStore = useAuthStore();
         <h1 class="cursor-pointer text-xl">Home</h1>
       </RouterLink>
       <RouterLink
-        :to="{ name: 'adminProgram' }"
+        :to="{ name: 'addProgram' }"
         class="flex items-center gap-x-3 text-white"
       >
         <svg
@@ -47,7 +47,7 @@ const authStore = useAuthStore();
         <h1 class="cursor-pointer text-xl">Add Program</h1>
       </RouterLink>
       <RouterLink
-        :to="{ name: 'adminProgram' }"
+        :to="{ name: 'addCourse' }"
         class="flex items-center gap-x-3 text-white"
       >
         <svg
@@ -62,7 +62,7 @@ const authStore = useAuthStore();
         <h1 class="cursor-pointer text-xl">Add Course</h1>
       </RouterLink>
       <RouterLink
-        :to="{ name: 'adminProgram' }"
+        :to="{ name: 'addCourse' }"
         class="flex items-center gap-x-3 text-white"
       >
         <svg

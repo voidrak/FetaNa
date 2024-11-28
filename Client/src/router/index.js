@@ -10,6 +10,7 @@ import TestUi from "@/Components/Ui/TestUi.vue";
 import AdminHome from "@/views/Admin/AdminHome.vue";
 import AdminAddProgram from "@/Components/Admin/AdminAddProgram.vue";
 import AdminProgramPage from "@/views/Admin/AdminProgramPage.vue";
+import AdminAddCourse from "@/Components/Admin/AdminAddCourse.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,30 @@ const router = createRouter({
       meta: { auth: true },
     },
     {
+      path: "/admin",
+      name: "adminHome",
+      component: AdminHome,
+      meta: { admin: true },
+    },
+    {
+      path: "/admin/add-program",
+      name: "addProgram",
+      component: AdminAddProgram,
+      meta: { admin: true },
+    },
+    {
+      path: "/admin/add-course",
+      name: "addCourse",
+      component: AdminAddCourse,
+      meta: { admin: true },
+    },
+    {
+      path: "/programs/:id",
+      name: "AdminProgramPage",
+      component: AdminProgramPage,
+      meta: { admin: true },
+    },
+    {
       path: "/programs/:id",
       name: "ProgramPage",
       component: ProgramPage,
@@ -51,24 +76,7 @@ const router = createRouter({
       component: CoursePage,
       meta: { auth: true },
     },
-    {
-      path: "/admin",
-      name: "adminHome",
-      component: AdminHome,
-      meta: { admin: true },
-    },
-    {
-      path: "/admin/add-program",
-      name: "adminProgram",
-      component: AdminAddProgram,
-      meta: { admin: true },
-    },
-    {
-      path: "/programs/:id",
-      name: "AdminProgramPage",
-      component: AdminProgramPage,
-      meta: { admin: true },
-    },
+
     {
       path: "/testUi",
       name: "TestUi",

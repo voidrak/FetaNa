@@ -28,7 +28,8 @@ class ProgramController extends Controller
 
     public function show(Program $program)
     {
-        return   $program;
+        $program->load('courses');
+        return $program;
     }
 
     public function update(Request $request, Program $program)

@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Course $course)
     {
         $courses = Course::all();
         return ["courses" => $courses];
@@ -16,7 +17,12 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'name' => 'required|unique:courses',
+            'name' => [
+                'required',
+                Rule::unique('courses')->where(function ($query) use ($request) {
+                    return $query->where('program_id', $request->program_id);
+                }),
+            ],
             'program_id' => 'required|exists:programs,id'
         ]);
 
