@@ -48,7 +48,7 @@ const toggleSideBar = () => {
           </div>
         </div>
       </div>
-      <div class="pt-3 pl-3">
+      <div class="pt-3 pl-3 w-full">
         <slot> </slot>
       </div>
     </div>

@@ -26,9 +26,9 @@ defineProps({
     </div>
     <div
       :class="[`${isSideOpen ? `` : `hidden`}`]"
-      class="mt-48 flex flex-col px-8"
+      class="mt-24 flex flex-col px-8"
     >
-      <div class="mb-16 space-y-4">
+      <div class="mb-16 space-y-8">
         <RouterLink
           :to="{ name: 'home' }"
           class="flex items-center gap-x-2 text-white"

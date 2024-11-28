@@ -13,7 +13,7 @@ class ProgramController extends Controller
     public function index()
     {
         $programs = Program::all();
-        return ["programs" => $programs];
+        return  $programs;
     }
 
     public function store(Request $request)
@@ -23,12 +23,12 @@ class ProgramController extends Controller
         ]);
 
         $program = $request->user()->programs()->create($validate);
-        return ['course' => $program];
+        return  $program;
     }
 
     public function show(Program $program)
     {
-        return ['program' => $program];
+        return   $program;
     }
 
     public function update(Request $request, Program $program)
@@ -39,7 +39,7 @@ class ProgramController extends Controller
 
         $program->update($validate);
 
-        return ['program' => $program];
+        return   $program;
     }
 
     public function destroy(Program $program)

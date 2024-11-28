@@ -9,6 +9,7 @@ import { useAuthStore } from "@/stores/auth";
 import TestUi from "@/Components/Ui/TestUi.vue";
 import AdminHome from "@/views/Admin/AdminHome.vue";
 import AdminAddProgram from "@/Components/Admin/AdminAddProgram.vue";
+import AdminProgramPage from "@/views/Admin/AdminProgramPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,7 +40,7 @@ const router = createRouter({
       meta: { auth: true },
     },
     {
-      path: "/SoftwareEngineering",
+      path: "/programs/:id",
       name: "ProgramPage",
       component: ProgramPage,
       meta: { auth: true },
@@ -60,6 +61,12 @@ const router = createRouter({
       path: "/admin/add-program",
       name: "adminProgram",
       component: AdminAddProgram,
+      meta: { admin: true },
+    },
+    {
+      path: "/programs/:id",
+      name: "AdminProgramPage",
+      component: AdminProgramPage,
       meta: { admin: true },
     },
     {
