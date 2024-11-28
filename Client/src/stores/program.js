@@ -21,6 +21,19 @@ export const useProgramStore = defineStore("programStore", {
       console.log(data);
       return data;
     },
+    /*********************  Get A Program ********************** */
+
+    async getProgram(program) {
+      const res = await fetch(`/api/programs/${program}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      return data;
+    },
 
     /*********************  Create Program ********************** */
 

@@ -3,7 +3,7 @@ import ProgramIcon from "/public/image/ProgramIcon.png";
 import { computed, defineProps } from "vue";
 const props = defineProps({
   ProgramTitle: String,
-  id: String,
+  id: Number,
   isAdmin: {
     type: Boolean,
     default: false,
