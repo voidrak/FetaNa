@@ -18,7 +18,7 @@ const routeName = computed(() =>
 <template>
   <RouterLink
     :to="{ name: routeName, params: { id: props.id } }"
-    class="mx-auto flex w-full max-w-[350px] cursor-pointer items-center gap-x-2 rounded-lg bg-white px-2 py-2 shadow-md shadow-black/30 lg:h-[70px] lg:hover:scale-105"
+    class="mx-auto z-50 flex w-full max-w-[350px] cursor-pointer items-center gap-x-2 rounded-lg bg-white px-2 py-2 shadow-md shadow-black/30 lg:h-[70px] lg:hover:scale-105"
   >
     <div class="">
       <img :src="ProgramIcon" alt="ProgramIcon" class="w-[50px]" />
