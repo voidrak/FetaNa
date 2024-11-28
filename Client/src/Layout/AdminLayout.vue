@@ -12,8 +12,6 @@ const authStore = useAuthStore();
 const toggleSideBar = () => {
   isSideOpen.value = !isSideOpen.value;
 };
-
-console.log(authStore.user);
 </script>
 
 <template>
@@ -50,7 +48,9 @@ console.log(authStore.user);
           </div>
         </div>
       </div>
-      <slot> </slot>
+      <div class="pt-3 pl-3">
+        <slot> </slot>
+      </div>
     </div>
   </div>
 </template>

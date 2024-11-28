@@ -8,6 +8,7 @@ import RegisterPage from "@/views/Auth/RegisterPage.vue";
 import { useAuthStore } from "@/stores/auth";
 import TestUi from "@/Components/Ui/TestUi.vue";
 import AdminHome from "@/views/Admin/AdminHome.vue";
+import AdminAddProgram from "@/Components/Admin/AdminAddProgram.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,12 @@ const router = createRouter({
       path: "/admin",
       name: "adminHome",
       component: AdminHome,
+      meta: { admin: true },
+    },
+    {
+      path: "/admin/add-program",
+      name: "adminProgram",
+      component: AdminAddProgram,
       meta: { admin: true },
     },
     {
