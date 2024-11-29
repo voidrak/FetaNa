@@ -1,11 +1,24 @@
 <script setup>
 import CourseCard from "@/Components/ProgramPage/CourseCard.vue";
 import AuthenticatedLayout from "@/Layout/AuthenticatedLayout.vue";
+import { useProgramStore } from "@/stores/program";
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
+
+const { getProgram } = useProgramStore();
+const program = ref(null);
+
+const route = useRoute();
+
+onMounted(async () => {
+  program.value = await getProgram(route.params.id);
+  console.log(program.value.name);
+});
 </script>
 
 <template>
   <AuthenticatedLayout>
-    <div class="px-2 py-8">
+    <div v-if="program" class="px-2 py-8">
       <div class="items-center gap-x-4 px-4 mlg:my-8 lg:flex xl:ml-12">
         <h1 class="text-3xl lg:text-4xl xl:text-5xl">Exit Exam for</h1>
         <h1

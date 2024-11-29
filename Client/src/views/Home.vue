@@ -37,11 +37,7 @@ onMounted(async () => {
         class="mt-16 grid gap-x-4 gap-y-4 lg:grid-cols-2 xl:grid-cols-3"
       >
         <div v-for="program in programs" :key="program.id">
-          <ProgramCard
-            :ProgramTitle="program.name"
-            :id="program.id"
-            :isAdmin="true"
-          />
+          <ProgramCard :ProgramTitle="program.name" :id="program.id" />
         </div>
       </div>
       <div v-else>

@@ -96,6 +96,9 @@ router.beforeEach(async (to, from) => {
   if (authStore.user?.role === "admin" && to.meta.auth) {
     return { name: "adminHome" };
   }
+  if (authStore.user?.role !== "admin" && to.meta.admin) {
+    return { name: "home" };
+  }
   if (authStore.user && to.meta.guest) {
     return { name: "home" };
   }
