@@ -30,12 +30,12 @@ class CourseController extends Controller
 
         $course =  $request->user()->courses()->create($validate);
 
-        return ["course" => $course];
+        return  $course;
     }
 
     public function show(Course $course)
     {
-        return ["course" => $course];
+        return   $course;
     }
 
     public function update(Request $request, Course $course)
@@ -46,7 +46,7 @@ class CourseController extends Controller
 
         $course->update($validate);
 
-        return ["course" => $course];
+        return $course;
     }
 
     public function destroy(Course $course)

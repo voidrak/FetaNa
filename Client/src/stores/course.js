@@ -30,5 +30,19 @@ export const useCourseStore = defineStore("courseStore", {
         });
       }
     },
+
+    /*********************  Get a Courses ********************** */
+
+    async getCourse(course) {
+      const res = await fetch(`/api/courses/${course}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+
+      return data;
+    },
   },
 });

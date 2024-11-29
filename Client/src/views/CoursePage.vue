@@ -1,13 +1,28 @@
 <script setup>
 import AuthenticatedLayout from "@/Layout/AuthenticatedLayout.vue";
+import { useCourseStore } from "@/stores/course";
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+
+const { getCourse } = useCourseStore();
+const course = ref(null);
+
+const route = useRoute();
+onMounted(async () => {
+  course.value = await getCourse(route.params.id);
+  console.log(course.value.name);
+});
 </script>
 
 <template>
   <AuthenticatedLayout>
     <div class="xl:px-8">
-      <div class="mx-auto max-w-[1200px] px-2 py-4 mlg:px-4 sm:py-10 lg:mt-10">
+      <div
+        v-if="course"
+        class="mx-auto max-w-[1200px] px-2 py-4 mlg:px-4 sm:py-10 lg:mt-10"
+      >
         <h1 class="pb-4 text-xl font-bold mlg:text-2xl md:text-3xl">
-          <span class="text-bg-light-green">Computer Programming</span>
+          <span class="text-bg-light-green">{{ course.name }}</span>
           Questions
         </h1>
 
@@ -112,6 +127,9 @@ import AuthenticatedLayout from "@/Layout/AuthenticatedLayout.vue";
             </div>
           </div>
         </div>
+      </div>
+      <div v-else class="">
+        <h1 class=" ">No Question Found</h1>
       </div>
     </div>
   </AuthenticatedLayout>

@@ -51,7 +51,7 @@ onMounted(async () => {
 
       <div class="mt-12 grid gap-y-4 lg:grid-cols-2 2xl:grid-cols-3">
         <div v-for="course in program.courses" :key="course.id">
-          <CourseCard :courseTitle="course.name" />
+          <CourseCard :courseTitle="course.name" :id="course.id" />
         </div>
       </div>
     </div>
