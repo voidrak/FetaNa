@@ -16,7 +16,10 @@ const authStore = useAuthStore();
     </RouterLink>
 
     <div class="mb-24 space-y-6">
-      <div class="flex items-center gap-x-3 text-white">
+      <RouterLink
+        :to="{ name: 'home' }"
+        class="flex items-center gap-x-3 text-white"
+      >
         <svg
           class="size-6 fill-white"
           xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +30,7 @@ const authStore = useAuthStore();
           />
         </svg>
         <h1 class="cursor-pointer text-xl">Exams</h1>
-      </div>
+      </RouterLink>
       <div class="flex items-center gap-x-3 text-white">
         <svg
           class="size-6 fill-white"

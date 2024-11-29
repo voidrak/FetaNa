@@ -16,4 +16,8 @@ class Choice extends Model
     {
         return $this->belongsTo(Question::class);
     }
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

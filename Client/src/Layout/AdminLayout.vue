@@ -12,8 +12,6 @@ const authStore = useAuthStore();
 const toggleSideBar = () => {
   isSideOpen.value = !isSideOpen.value;
 };
-
-console.log(authStore.user);
 </script>
 
 <template>
@@ -26,7 +24,11 @@ console.log(authStore.user);
       <!-- heading -->
       <div class="border-y border-gray-400">
         <div class="hidden items-center justify-center px-4 py-5 md:flex">
-          <h1 class="text-2xl text-center font-semibold">Admin Dashboard</h1>
+          <h1
+            class="text-2xl text-center font-Montserrat text-bg-dark-green xl:text-3xl font-bold"
+          >
+            Admin Dashboard
+          </h1>
         </div>
         <div class="flex items-center justify-between p-3 md:hidden">
           <AdminSmallSideBar :isSideOpen="isSideOpen" @close="toggleSideBar" />
@@ -50,7 +52,9 @@ console.log(authStore.user);
           </div>
         </div>
       </div>
-      <slot> </slot>
+      <div class="pt-3 pl-3 w-full">
+        <slot> </slot>
+      </div>
     </div>
   </div>
 </template>

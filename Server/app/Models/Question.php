@@ -10,7 +10,7 @@ class Question extends Model
     /** @use HasFactory<\Database\Factories\QuestionFactory> */
     use HasFactory;
 
-    protected $fillable = ['question_text', 'created_by', 'course_id', 'correct_choice_id'];
+    protected $fillable = ['question_text', 'created_by', 'course_id',];
 
     public function creator()
     {
@@ -27,10 +27,7 @@ class Question extends Model
         return $this->hasMany(Choice::class);
     }
 
-    public function correctChoice()
-    {
-        return $this->belongsTo(Choice::class, 'correct_choice_id');
-    }
+
 
     public function notes()
     {
