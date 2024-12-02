@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 
 class CourseController extends Controller
 {
-    public function index(Course $course)
+    public function index()
     {
         $courses = Course::all();
         return ["courses" => $courses];
@@ -35,7 +35,8 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        return   $course;
+        $course->load('questions.choices');
+        return $course;
     }
 
     public function update(Request $request, Course $course)
