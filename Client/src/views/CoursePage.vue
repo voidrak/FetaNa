@@ -6,12 +6,25 @@ import { useRoute } from "vue-router";
 
 const { getCourse } = useCourseStore();
 const course = ref(null);
+const questionIndex = ref(0);
 
 const route = useRoute();
 onMounted(async () => {
   course.value = await getCourse(route.params.id);
-  console.log(course.value.name);
+  console.log(course.value);
 });
+
+const nextQuestion = () => {
+  if (questionIndex.value < course.value.questions.length - 1) {
+    questionIndex.value += 1;
+  }
+};
+
+const prevQuestion = () => {
+  if (questionIndex.value > 0) {
+    questionIndex.value -= 1;
+  }
+};
 </script>
 
 <template>
@@ -57,47 +70,28 @@ onMounted(async () => {
               </svg>
             </div>
           </div>
-          <div class="cursor-pointer px-1">
+          <div v-if="course" class="cursor-pointer px-1">
             <h1 class="px-1 md:px-3 md:text-xl lg:text-2xl">
-              <span class="">4.</span> Which of the following is the first
-              callback method that is invoked by the system during an activity
-              life-cycle?
+              <span class="">{{ questionIndex + 1 }} . </span>
+              {{ course.questions[questionIndex].question_text }}?
             </h1>
-            <div class="mt-4 space-y-4 px-4 lg:text-xl">
+            <div
+              v-for="choice in course.questions[questionIndex].choices"
+              class="mt-4 space-y-4 px-4 lg:text-xl"
+            >
               <div class="flex gap-x-4">
                 <div
                   class="mt-1 max-h-4 min-h-4 min-w-4 rounded-full border-2 border-gray-500 bg-transparent hover:bg-bg-light-green"
                 ></div>
                 <p class="">
-                  Design patterns are solutions to general software development
-                  Problems
+                  {{ choice.choice_text }}
                 </p>
-              </div>
-              <div class="flex gap-x-4">
-                <div
-                  class="mt-1 max-h-4 min-h-4 min-w-4 rounded-full border-2 border-gray-500 bg-transparent hover:bg-bg-light-green"
-                ></div>
-                <p class="">
-                  Design patterns capture the best practices of experienced
-                  object- Oriented software developers
-                </p>
-              </div>
-              <div class="flex gap-x-4">
-                <div
-                  class="mt-1 max-h-4 min-h-4 min-w-4 rounded-full border-2 border-gray-500 bg-transparent hover:bg-bg-light-green"
-                ></div>
-                <p class="">Both A and B</p>
-              </div>
-              <div class="flex gap-x-4">
-                <div
-                  class="mt-1 max-h-4 min-h-4 min-w-4 rounded-full border-2 border-gray-500 bg-transparent hover:bg-bg-light-green"
-                ></div>
-                <p class="">None of the mentioned above</p>
               </div>
             </div>
           </div>
           <div class="my-6 flex justify-around md:mt-10 lg:mt-16">
             <div
+              @click="prevQuestion"
               class="flex cursor-pointer items-center gap-x-3 rounded-xl bg-bg-light-green px-3 py-1"
             >
               <svg
@@ -112,6 +106,7 @@ onMounted(async () => {
               <p class="">Back</p>
             </div>
             <div
+              @click="nextQuestion"
               class="flex cursor-pointer items-center gap-x-3 rounded-xl bg-bg-light-green px-3 py-1"
             >
               <p class="">Next</p>

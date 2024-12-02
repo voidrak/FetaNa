@@ -62,7 +62,8 @@ const indexToChar = (index) => {
                 <div class="divide-bg-light-green divide-y">
                   <DisclosurePanel
                     v-for="(choice, index) in question.choices"
-                    class="px-4 pb-2 pt-4 text-sm text-gray-500"
+                    class="px-4 b pb-2 pt-4 text-sm text-gray-500"
+                    :class="choice.is_correct ? `bg-bg-light-green` : ``"
                   >
                     <p>
                       <span class="">{{ indexToChar(index) }} . </span>

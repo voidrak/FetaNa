@@ -47,10 +47,7 @@ class ChoiceController extends Controller
                         ->where('is_correct', false)
                         ->count();
                     if ($incorrectChoiceCount >= 3) {
-                        $correctChoiceExists = Choice::where('question_id', $request->question_id)
-                            ->where('is_correct', true)
-                            ->exists();
-                        if (!$correctChoiceExists) {
+                        if ($value === false) {
                             $fail('At least one correct choice is required per question.');
                         }
                     }
