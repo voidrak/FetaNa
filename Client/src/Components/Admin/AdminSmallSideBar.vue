@@ -74,8 +74,10 @@ defineProps({
           </svg>
           <h1 class="text-lg">Add Course</h1>
         </RouterLink>
-
-        <div class="flex items-center gap-x-2 text-white">
+        <RouterLink
+          :to="{ name: 'addQuestion' }"
+          class="flex items-center gap-x-2 text-white"
+        >
           <svg
             class="size-5 fill-white"
             xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +88,7 @@ defineProps({
             />
           </svg>
           <h1 class="text-lg">Add Question</h1>
-        </div>
+        </RouterLink>
         <div class="flex items-center gap-x-2 text-white">
           <svg
             class="size-5 fill-white"

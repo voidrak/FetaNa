@@ -62,7 +62,7 @@ const authStore = useAuthStore();
         <h1 class="cursor-pointer text-xl">Add Course</h1>
       </RouterLink>
       <RouterLink
-        :to="{ name: 'addCourse' }"
+        :to="{ name: 'addQuestion' }"
         class="flex items-center gap-x-3 text-white"
       >
         <svg

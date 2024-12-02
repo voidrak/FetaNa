@@ -5,7 +5,7 @@ import AdminLayout from "@/Layout/AdminLayout.vue";
 <template>
   <AdminLayout>
     <div class="">
-      <h1>hey</h1>
+      <h1>AdminAddQuestion</h1>
     </div>
   </AdminLayout>
 </template>

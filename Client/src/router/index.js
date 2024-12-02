@@ -12,6 +12,7 @@ import AdminAddProgram from "@/Components/Admin/AdminAddProgram.vue";
 import AdminProgramPage from "@/views/Admin/AdminProgramPage.vue";
 import AdminAddCourse from "@/Components/Admin/AdminAddCourse.vue";
 import AdminCoursePage from "@/views/Admin/AdminCoursePage.vue";
+import AdminAddQuestion from "@/Components/Admin/AdminAddQuestion.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -58,6 +59,12 @@ const router = createRouter({
       name: "addCourse",
       component: AdminAddCourse,
       meta: { admin: true },
+    },
+    {
+      path: "/admin/add-question",
+      name: "addQuestion",
+      component: AdminAddQuestion,
+      meth: { admin: true },
     },
     {
       path: "/admin/programs/:id",
