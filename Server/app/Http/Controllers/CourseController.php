@@ -8,10 +8,15 @@ use Illuminate\Validation\Rule;
 
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::all();
-        return ["courses" => $courses];
+        $request->validate([
+            'program_id' => 'required|exists:programs,id'
+        ]);
+        $program_id = $request->query("program_id");
+        $courses = Course::where("program_id", $program_id)->get();
+
+        return $courses;
     }
 
     public function store(Request $request)

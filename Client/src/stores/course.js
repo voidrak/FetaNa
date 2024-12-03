@@ -9,6 +9,19 @@ export const useCourseStore = defineStore("courseStore", {
   },
 
   actions: {
+    /*********************  Get All Courses ********************** */
+
+    async getAllCourses(program_id) {
+      const res = await fetch(`/api/courses?program_id=${program_id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+
+      return data;
+    },
     /*********************  Create Courses ********************** */
     async createCourse(formData) {
       const res = await fetch("/api/courses", {
