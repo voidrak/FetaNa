@@ -45,4 +45,6 @@ export const useCourseStore = defineStore("courseStore", {
       return data;
     },
   },
+
+  /*********************  Get a Courses  ********************** */
 });

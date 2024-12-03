@@ -163,7 +163,7 @@ onMounted(() => (errors.value = {}));
               </div>
             </Combobox>
             <p v-if="errors.program_id" class="text-sm text-red-500">
-              {{ errors.name[0] }}
+              {{ errors.program_id[0] }}
             </p>
           </div>
         </div>
