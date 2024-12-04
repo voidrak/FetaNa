@@ -23,7 +23,7 @@ export const useChoiceStore = defineStore("choiceStore", {
         this.ChoiceErrors = data.errors;
       } else {
         this.ChoiceErrors = {};
-        this.router.push({ name: "adminHome" });
+
       }
     },
 

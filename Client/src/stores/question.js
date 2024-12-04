@@ -24,10 +24,10 @@ export const useQuestionStore = defineStore("questionStore", {
         this.errors = data.errors;
       } else {
         this.errors = {};
-        // this.router.push({
-        //   name: 'AdminCoursePage',
-        //   params: { id: formData.course_id }
-        // })
+        this.router.push({
+          name: 'AdminCoursePage',
+          params: { id: formData.course_id }
+        })
         return data;
       }
     },
@@ -41,8 +41,18 @@ export const useQuestionStore = defineStore("questionStore", {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         },
       });
-      console.log(routeId);
       const data = await res.json();
+      if (data.errors) {
+        this.errors = data.errors;
+      } else {
+        this.errors = {};
+        console.log(routeId);
+        this.router.push({
+          name: "AdminCoursePage",
+          params: { id: routeId }
+        })
+        return data;
+      }
 
     },
   },

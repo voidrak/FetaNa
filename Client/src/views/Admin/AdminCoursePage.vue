@@ -24,7 +24,7 @@ const indexToChar = (index) => {
 };
 
 const DeleteQuestion = (id) => {
-  console.log(route.params.id);
+  // console.log(route.params.id);
   deleteQuestion(id, route.params.id);
 }
 
