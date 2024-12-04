@@ -261,7 +261,7 @@ const handleCreateQuestion = async () => {
               <div @click="correctChoice = 1"
                 class="py-2 px-3 border border-gray-500 rounded-md cursor-pointer hover:bg-bg-light-green" :class="{
                   'bg-bg-light-green': correctChoice === 1,
-                }">IsCorrect
+                }">Correct
               </div>
             </div>
             <p v-if="ChoiceErrors.is_correct" class="text-sm text-red-500">
@@ -280,7 +280,7 @@ const handleCreateQuestion = async () => {
               <div @click="correctChoice = 2"
                 class="py-2 px-3 border border-gray-500 rounded-md cursor-pointer hover:bg-bg-light-green" :class="{
                   'bg-bg-light-green': correctChoice === 2,
-                }">IsCorrect
+                }">Correct
               </div>
             </div>
             <p v-if="ChoiceErrors.is_correct" class="text-sm text-red-500">
@@ -299,7 +299,7 @@ const handleCreateQuestion = async () => {
               <div @click="correctChoice = 3"
                 class="py-2 px-3 border border-gray-500 rounded-md cursor-pointer hover:bg-bg-light-green" :class="{
                   'bg-bg-light-green': correctChoice === 3,
-                }">IsCorrect
+                }">Correct
               </div>
             </div>
             <p v-if="ChoiceErrors.is_correct" class="text-sm text-red-500">
@@ -318,7 +318,7 @@ const handleCreateQuestion = async () => {
               <div @click="correctChoice = 4"
                 class="py-2 px-3 border border-gray-500 rounded-md cursor-pointer hover:bg-bg-light-green" :class="{
                   'bg-bg-light-green': correctChoice === 4,
-                }">IsCorrect
+                }">Correct
               </div>
             </div>
             <p v-if="ChoiceErrors.is_correct" class="text-sm text-red-500">

@@ -1,3 +1,4 @@
+import router from "@/router";
 import { defineStore } from "pinia";
 
 export const useQuestionStore = defineStore("questionStore", {
@@ -22,8 +23,28 @@ export const useQuestionStore = defineStore("questionStore", {
       if (data.errors) {
         this.errors = data.errors;
       } else {
+        this.errors = {};
+        // this.router.push({
+        //   name: 'AdminCoursePage',
+        //   params: { id: formData.course_id }
+        // })
         return data;
       }
     },
+
+    /*********************  Create Questions ********************** */
+
+    async deleteQuestion(question, routeId) {
+      const res = await fetch(`/api/questions/${question}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+      });
+      console.log(routeId);
+      const data = await res.json();
+
+    },
   },
+
 });
