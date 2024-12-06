@@ -11,17 +11,19 @@ const { getCourse } = useCourseStore();
 const course = ref(null);
 const questionIndex = ref(0);
 const isSideOpen = ref(false);
+const selected = ref(null)
+const styleOption = ref("")
 
 
 onMounted(async () => {
   course.value = await getCourse(route.params.id);
-  console.log(course.value);
 });
 
 const nextQuestion = () => {
   if (questionIndex.value < course.value.questions.length - 1) {
     questionIndex.value += 1;
   }
+  selected.value = null
 };
 
 const prevQuestion = () => {
@@ -40,6 +42,19 @@ const truncateText = (text) => {
   }
   return text
 }
+
+
+
+const handleCheck = (choice) => {
+  selected.value = choice.id;
+  if (choice.is_correct) {
+    styleOption.value = "select"
+  } else if (!choice.is_correct) {
+    styleOption.value = "wrong"
+  }
+
+
+};
 </script>
 
 <template>
@@ -110,15 +125,21 @@ const truncateText = (text) => {
               <span class="">{{ questionIndex + 1 }} . </span>
               {{ course.questions[questionIndex].question_text }}?
             </h1>
-            <div v-for="choice in course.questions[questionIndex].choices" class="mt-4 space-y-4 px-4 lg:text-xl">
-              <div class="flex gap-x-4">
+            <div v-for="(choice, index) in course.questions[questionIndex].choices"
+              class="mt-4 space-y-4 px-4 lg:text-xl">
+              <button @click=" handleCheck(choice)" class="flex w-full  p-2 gap-x-4 group" :class="{
+                'bg-bg-light-green': styleOption === 'select' && selected == choice.id,
+                'bg-red-500': styleOption === 'wrong' && selected == choice.id,
+                'bg-bg-light-green': selected && choice.is_correct,
+              }
+                " :disabled="selected">
                 <div
-                  class="mt-1 max-h-4 min-h-4 min-w-4 rounded-full border-2 border-gray-500 bg-transparent hover:bg-bg-light-green">
+                  class="mt-1 max-h-4 min-h-4 min-w-4 max-w-4 rounded-full border-2 border-gray-500 bg-transparent group-hover:bg-bg-light-green   ">
                 </div>
                 <p class="">
                   {{ choice.choice_text }}
                 </p>
-              </div>
+              </button>
             </div>
           </div>
           <div class="my-6 flex justify-around md:mt-10 lg:mt-16">
