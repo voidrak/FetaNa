@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from "@/Layout/AuthenticatedLayout.vue";
 import { useCourseStore } from "@/stores/course";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive, watch } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
@@ -13,6 +13,9 @@ const questionIndex = ref(0);
 const isSideOpen = ref(false);
 const selected = ref(null)
 const styleOption = ref("")
+const questionSolved = ref(false)
+const currentSolvedQuestion = ref(null)
+const solved = reactive([])
 
 
 onMounted(async () => {
@@ -23,7 +26,7 @@ const nextQuestion = () => {
   if (questionIndex.value < course.value.questions.length - 1) {
     questionIndex.value += 1;
   }
-  selected.value = null
+
 };
 
 const prevQuestion = () => {
@@ -44,17 +47,34 @@ const truncateText = (text) => {
 }
 
 
+const isQuestionSolved = (question_id) => {
+  return solved.some(solvedItem => solvedItem.question_id === question_id)
+}
 
 const handleCheck = (choice) => {
   selected.value = choice.id;
+  questionSolved.value = true
   if (choice.is_correct) {
     styleOption.value = "select"
   } else if (!choice.is_correct) {
     styleOption.value = "wrong"
   }
 
+  solved.push({ question_id: course.value.questions[questionIndex.value].id, choice_id: choice.id });
+
+
+
 
 };
+
+watch([course, questionIndex], ([newCourse, newQuestionIndex]) => {
+  if (newCourse && newCourse.questions && newCourse.questions[newQuestionIndex]) {
+    questionSolved.value = isQuestionSolved(newCourse.questions[newQuestionIndex].id);
+    currentSolvedQuestion.value = solved.find((question) => question.question_id === newCourse.questions[newQuestionIndex].id);
+    console.log(currentSolvedQuestion.value);
+  }
+});
+
 </script>
 
 <template>
@@ -128,11 +148,12 @@ const handleCheck = (choice) => {
             <div v-for="(choice, index) in course.questions[questionIndex].choices"
               class="mt-4 space-y-4 px-4 lg:text-xl">
               <button @click=" handleCheck(choice)" class="flex w-full  p-2 gap-x-4 group" :class="{
-                'bg-bg-light-green': styleOption === 'select' && selected == choice.id,
+                'bg-bg-dark-green': styleOption === 'select' && selected == choice.id,
                 'bg-red-500': styleOption === 'wrong' && selected == choice.id,
-                'bg-bg-light-green': selected && choice.is_correct,
+                'bg-bg-light-green': choice.is_correct && questionSolved,
+                'bg-red-400': !choice.is_correct && questionSolved && currentSolvedQuestion?.choice_id === choice.id,
               }
-                " :disabled="selected">
+                " :disabled="questionSolved">
                 <div
                   class="mt-1 max-h-4 min-h-4 min-w-4 max-w-4 rounded-full border-2 border-gray-500 bg-transparent group-hover:bg-bg-light-green   ">
                 </div>
