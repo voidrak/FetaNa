@@ -41,7 +41,7 @@ function openEditModal() {
       <DeleteProgramModal @closeDeleteModal="closeDeleteModal" @openDeleteModal="openDeleteModal"
         :isDeleteOpen="isDeleteOpen" :program_id="program?.id" />
       <EditProgramModal @closeEditModal="closeEditModal" @openEditModal="openEditModal" :isEditOpen="isEditOpen"
-        :program_id="program?.id" />
+        :program_id="program?.id" :programName="program?.name" />
 
       <div v-if="program" class="">
         <div class="flex items-center justify-center gap-x-1 min-[425px]:gap-x-2 sm:gap-x-4 lg:gap-x-6">

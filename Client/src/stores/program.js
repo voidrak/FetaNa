@@ -57,6 +57,29 @@ export const useProgramStore = defineStore("programStore", {
       }
     },
 
+    /*********************  Edit Program ********************** */
+
+    async updateProgram(program, formdata) {
+      const res = await fetch(`/api/programs/${program}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(formdata),
+      })
+
+      const data = await res.json();
+      if (data.errors) {
+        this.errors = data.errors
+      } else {
+        this.errors = {}
+        this.router.push({ name: 'adminHome' })
+
+      }
+
+    },
+
+
     /*********************  Delete Program ********************** */
 
     async deleteProgram(program) {

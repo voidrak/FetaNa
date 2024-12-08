@@ -1,5 +1,6 @@
 <script setup>
 
+import { useProgramStore } from '@/stores/program';
 import {
   TransitionRoot,
   TransitionChild,
@@ -7,11 +8,39 @@ import {
   DialogPanel,
   DialogTitle,
 } from '@headlessui/vue'
+import { storeToRefs } from 'pinia';
+import { onMounted, reactive, watch } from 'vue';
 
-defineProps(({
+const props = defineProps(({
   isEditOpen: Boolean,
-  program_id: Number
+  program_id: Number,
+  programName: String
 }))
+
+const { errors } = storeToRefs(useProgramStore())
+const { updateProgram } = useProgramStore()
+
+const formData = reactive({
+  name: props.programName,
+});
+
+
+onMounted(() => (errors.value = {}));
+
+const handleUpdate = () => {
+
+  updateProgram(props.program_id, formData)
+
+
+}
+
+
+watch(() => props.programName, (newProgramName) => {
+  if (newProgramName) {
+    formData.name = newProgramName
+  }
+})
+
 
 </script>
 <template>
@@ -34,15 +63,26 @@ defineProps(({
                 Edit The Program
               </DialogTitle>
               <div class="mt-2">
-                <p class="text-sm text-gray-500">
-                  This action cannot be reversed.
-                </p>
+                <div className=" mt-6 flex flex-wrap">
+                  <div className="w-full  px-3">
+                    <label className="mb-2 md:text-base block text-xs font-bold uppercase tracking-wide text-black"
+                      htmlFor="name">
+                      Program Name
+                    </label>
+                    <input v-model="formData.name"
+                      className="mb-3   w-full block  appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
+                      id="name" name="name" type="text" />
+                    <p v-if="errors.name" class="text-sm text-red-500">
+                      {{ errors.name[0] }}
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div class="mt-4 flex gap-x-4 justify-end">
                 <button type="button"
                   class="inline-flex justify-center rounded-md border border-transparent bg-bg-light-green text-black px-4 py-2 text-sm font-medium  focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  @click="$emit('closeEditModal')">
+                  @click="handleUpdate">
                   Submit
                 </button>
                 <button type="button"
