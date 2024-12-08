@@ -6,6 +6,7 @@ import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import DeleteModal from "@/Components/ProgramPage/DeleteModal.vue";
+import EditModal from "@/Components/ProgramPage/EditModal.vue";
 
 const { getProgram } = useProgramStore();
 const program = ref(null);
@@ -14,10 +15,11 @@ const route = useRoute();
 
 onMounted(async () => {
   program.value = await getProgram(route.params.id);
-  console.log(program.value.name);
+
 });
 
 const isDeleteOpen = ref(false)
+const isEditOpen = ref(false)
 
 function closeDeleteModal() {
   isDeleteOpen.value = false
@@ -25,13 +27,22 @@ function closeDeleteModal() {
 function openDeleteModal() {
   isDeleteOpen.value = true
 }
+function closeEditModal() {
+  isEditOpen.value = false
+}
+function openEditModal() {
+  isEditOpen.value = true
+}
 </script>
 
 <template>
   <AdminLayout>
     <div class="mt-6">
-      <DeleteModal @closeDeleteModal="closeDeleteModal" @openDeleteModal="openDeleteModal"
-        :isDeleteOpen="isDeleteOpen" />
+      <DeleteModal @closeDeleteModal="closeDeleteModal" @openDeleteModal="openDeleteModal" :isDeleteOpen="isDeleteOpen"
+        :program_id="program?.id" />
+      <EditModal @closeEditModal="closeEditModal" @openEditModal="openEditModal" :isEditOpen="isEditOpen"
+        :program_id="program?.id" />
+
       <div v-if="program" class="">
         <div class="flex items-center justify-center gap-x-1 min-[425px]:gap-x-2 sm:gap-x-4 lg:gap-x-6">
           <h1
@@ -65,7 +76,7 @@ function openDeleteModal() {
                 leave-to-class="transform scale-95 opacity-0">
                 <MenuItems
                   class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
-                  <div @click="openDeleteModal" class="px-1 py-1">
+                  <div @click="openEditModal" class="px-1 py-1">
                     <MenuItem v-slot="{ active }">
                     <button :class="[
                       active ? 'bg-bg-light-green text-white' : 'text-gray-900',
