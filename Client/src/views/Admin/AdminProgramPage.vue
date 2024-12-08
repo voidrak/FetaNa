@@ -5,8 +5,8 @@ import { useProgramStore } from "@/stores/program";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import DeleteModal from "@/Components/ProgramPage/DeleteModal.vue";
-import EditModal from "@/Components/ProgramPage/EditModal.vue";
+import DeleteProgramModal from "@/Components/ProgramPage/DeleteProgramModal.vue";
+import EditProgramModal from "@/Components/ProgramPage/EditProgramModal.vue";
 
 const { getProgram } = useProgramStore();
 const program = ref(null);
@@ -38,9 +38,9 @@ function openEditModal() {
 <template>
   <AdminLayout>
     <div class="mt-6">
-      <DeleteModal @closeDeleteModal="closeDeleteModal" @openDeleteModal="openDeleteModal" :isDeleteOpen="isDeleteOpen"
-        :program_id="program?.id" />
-      <EditModal @closeEditModal="closeEditModal" @openEditModal="openEditModal" :isEditOpen="isEditOpen"
+      <DeleteProgramModal @closeDeleteModal="closeDeleteModal" @openDeleteModal="openDeleteModal"
+        :isDeleteOpen="isDeleteOpen" :program_id="program?.id" />
+      <EditProgramModal @closeEditModal="closeEditModal" @openEditModal="openEditModal" :isEditOpen="isEditOpen"
         :program_id="program?.id" />
 
       <div v-if="program" class="">
