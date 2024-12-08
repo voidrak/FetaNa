@@ -1,6 +1,6 @@
 <script setup>
 
-import { useProgramStore } from '@/stores/program';
+import { useCourseStore } from '@/stores/course';
 import {
   TransitionRoot,
   TransitionChild,
@@ -14,26 +14,28 @@ import { onMounted, reactive, watch } from 'vue';
 const props = defineProps(({
   isEditOpen: Boolean,
   course_id: Number,
-  courseName: String
+  courseName: String,
+  program_id: Number
+
 }))
 
-const { errors } = storeToRefs(useProgramStore())
-const { updateCourse } = useProgramStore()
+const { errors } = storeToRefs(useCourseStore())
+const { updateCourse } = useCourseStore()
 
 const formData = reactive({
   name: props.courseName,
 });
 
 
-onMounted(() => (errors.value = {}));
 
 const handleUpdate = () => {
 
-  updateCourse(props.course_id, formData)
+  updateCourse(props.course_id, formData, props.program_id)
 
 
 }
 
+onMounted(() => (errors.value = {}));
 
 watch(() => props.courseName, (newProgramName) => {
   if (newProgramName) {
@@ -60,14 +62,14 @@ watch(() => props.courseName, (newProgramName) => {
             <DialogPanel
               class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
               <DialogTitle as="h3" class="text-lg font-medium leading-6 text-black">
-                Edit The Program
+                Edit The Course
               </DialogTitle>
               <div class="mt-2">
                 <div className=" mt-6 flex flex-wrap">
                   <div className="w-full  px-3">
                     <label className="mb-2 md:text-base block text-xs font-bold uppercase tracking-wide text-black"
                       htmlFor="name">
-                      Program Name
+                      Course Name
                     </label>
                     <input v-model="formData.name"
                       className="mb-3   w-full block  appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"

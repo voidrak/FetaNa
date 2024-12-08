@@ -52,7 +52,7 @@ function openEditModal() {
       <DeleteCourseModal @closeDeleteModal="closeDeleteModal" @openDeleteModal="openDeleteModal"
         :isDeleteOpen="isDeleteOpen" :course_id="course?.id" :program_id="course?.program_id" />
       <EditCourseModal @closeEditModal="closeEditModal" @openEditModal="openEditModal" :isEditOpen="isEditOpen"
-        :course_id="course?.id" :courseName="course?.name" />
+        :course_id="course?.id" :courseName="course?.name" :program_id="course?.program_id" />
 
       <div class="flex items-center justify-center gap-x-1 min-[425px]:gap-x-2 sm:gap-x-4 lg:gap-x-6">
         <h1 class="text-2xl lg:text-3xl xl:text-4xl font-semibold text-bg-light-green">

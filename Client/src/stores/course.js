@@ -59,6 +59,33 @@ export const useCourseStore = defineStore("courseStore", {
     },
     /*********************  Delete a Courses  ********************** */
 
+    async updateCourse(course, formData, program_id) {
+      const res = await fetch(`/api/courses/${course}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(formData)
+      })
+
+      const data = await res.json();
+
+      if (data.errors) {
+        this.errors = data.errors
+      } else {
+        this.errors = {};
+        this.router.push({
+          name: 'AdminProgramPage',
+          params: { id: program_id }
+        })
+
+      }
+
+
+    },
+
+    /*********************  Delete a Courses  ********************** */
+
     async deleteCourse(course, program_id) {
       const res = await fetch(`/api/courses/${course}`, {
         method: 'DELETE',
