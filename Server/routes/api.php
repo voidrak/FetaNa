@@ -42,13 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/questions/{question}', [QuestionController::class, 'update'])->middleware(AdminMiddleware::class);
     Route::delete('/questions/{question}', [QuestionController::class, 'destroy'])->middleware(AdminMiddleware::class);
 });
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/choices', [ChoiceController::class, 'index']);
-    Route::get('/choices/{choice}', [ChoiceController::class, 'show']);
-    Route::post('/choices', [ChoiceController::class, 'store'])->middleware(AdminMiddleware::class);
-    Route::put('/choices/{choice}', [ChoiceController::class, 'update'])->middleware(AdminMiddleware::class);
-    Route::delete('/choices/{choice}', [ChoiceController::class, 'destroy'])->middleware(AdminMiddleware::class);
-});
+
 
 
 

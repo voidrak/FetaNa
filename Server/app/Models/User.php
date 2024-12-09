@@ -56,10 +56,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Note::class, "created_by");
     }
-    public function choices()
-    {
-        return $this->hasMany(Choice::class, "created_by");
-    }
+
 
     public function bugs()
     {

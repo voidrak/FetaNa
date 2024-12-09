@@ -19,6 +19,8 @@ class CourseController extends Controller
         return $courses;
     }
 
+
+
     public function store(Request $request)
     {
         $validate = $request->validate([
@@ -40,7 +42,7 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        $course->load('questions.choices');
+        $course->load('questions');
         return $course;
     }
 

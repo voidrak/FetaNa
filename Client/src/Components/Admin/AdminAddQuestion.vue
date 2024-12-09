@@ -14,20 +14,19 @@ import { storeToRefs } from "pinia";
 import { onMounted, reactive } from "vue";
 import { useProgramStore } from "@/stores/program";
 import { useQuestionStore } from "@/stores/question";
-import { useChoiceStore } from "@/stores/choice";
+
 
 const { getAllPrograms } = useProgramStore();
 const { getAllCourses } = useCourseStore();
 const { createQuestion } = useQuestionStore();
-const { createChoice } = useChoiceStore();
+
 const { errors } = storeToRefs(useQuestionStore());
-const { ChoiceErrors } = storeToRefs(useChoiceStore());
+
 
 
 const programs = ref([]);
 const courses = ref([]);
-const generalError = ref("")
-const questionResponse = ref(null)
+
 
 onMounted(async () => {
   programs.value = await getAllPrograms();
@@ -36,19 +35,16 @@ onMounted(async () => {
 const formData = reactive({
   question_text: "",
   course_id: "",
+  choices: [],
+  correct_choice: ""
 });
-const choicesFormData = reactive({
-  choice_text_1: "",
-  choice_text_2: "",
-  choice_text_3: "",
-  choice_text_4: "",
-});
+
 
 let selected = ref(programs.value[0]);
 let selectedCourse = ref(courses.value[0]);
 let query = ref("");
 let CoursesQuery = ref("");
-let correctChoice = ref(0)
+
 
 
 let filteredProgram = computed(() =>
@@ -84,26 +80,7 @@ watch(selectedCourse, async (newSelected) => {
 
 onMounted(() => (errors.value = {}));
 
-const handleCreateQuestion = async () => {
-  if (correctChoice.value !== 0) {
 
-    questionResponse.value = await createQuestion(formData);
-
-    if (questionResponse.value.id) {
-
-      createChoice({ choice_text: choicesFormData.choice_text_1, question_id: questionResponse.value?.id, is_correct: correctChoice.value === 1 })
-      createChoice({ choice_text: choicesFormData.choice_text_2, question_id: questionResponse.value?.id, is_correct: correctChoice.value === 2 })
-      createChoice({ choice_text: choicesFormData.choice_text_3, question_id: questionResponse.value?.id, is_correct: correctChoice.value === 3 })
-      createChoice({ choice_text: choicesFormData.choice_text_4, question_id: questionResponse.value?.id, is_correct: correctChoice.value === 4 })
-    }
-  } else {
-    generalError.value = "At least one correct choice is required per question."
-  }
-  // console.log(questionResponse.value);
-  // console.log(choicesFormData)
-
-
-}
 
 </script>
 
@@ -113,10 +90,8 @@ const handleCreateQuestion = async () => {
       <h1 class="font-Montserrat text-xl md:text-3xl lg:text-4xl my-8">
         Create New <span class="text-bg-light-green font-bold">Question</span>
       </h1>
-      <p v-if="generalError" class="text-lg font-bold text-red-500">
-        {{ generalError }}
-      </p>
-      <form @submit.prevent="handleCreateQuestion" class=" pb-8">
+
+      <form @submit.prevent="createQuestion(formData)" class=" pb-8">
         <div className=" mt-6 w-full    ">
           <div className=" ">
             <label className="mb-2 md:text-base block text-xs font-bold uppercase tracking-wide text-black"
@@ -246,8 +221,12 @@ const handleCreateQuestion = async () => {
               </TransitionRoot>
             </div>
           </Combobox>
-          <p v-if="errors.course_id" class="text-sm text-red-500">
+          <p v-if="errors.course_id" class="text-lg font-bold text-red-500">
             {{ errors.course_id[0] }}
+          </p>
+
+          <p v-if="errors.correct_choice" class="text-lg text-red-500">
+            {{ errors.correct_choice[0] }}
           </p>
           <div className=" mt-8">
             <label className="mb-2 w-[120px] md:text-base block text-xs font-bold uppercase tracking-wide text-black"
@@ -255,17 +234,17 @@ const handleCreateQuestion = async () => {
               Choice One
             </label>
             <div class="flex gap-x-6 items-center">
-              <input v-model="choicesFormData.choice_text_1"
+              <input v-model="formData.choices[0]"
                 className="mb-3  min-w-[280px] md:w-[500px] w-[80%] xl:w-[600px] block  appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                 id="choice_text_1" name="choice_text" type="text" />
-              <div @click="correctChoice = 1"
+              <div @click="formData.correct_choice = formData.choices[0]"
                 class="py-2 px-3 border border-gray-500 rounded-md cursor-pointer hover:bg-bg-light-green" :class="{
-                  'bg-bg-light-green': correctChoice === 1,
+                  'bg-bg-light-green': formData.correct_choice === formData.choices[0],
                 }">Correct
               </div>
             </div>
-            <p v-if="ChoiceErrors.is_correct" class="text-sm text-red-500">
-              {{ ChoiceErrors.is_correct }}
+            <p v-if="errors.choices" class="text-sm text-red-500">
+              {{ errors.choices[0] }}
             </p>
           </div>
           <div className=" ">
@@ -274,17 +253,17 @@ const handleCreateQuestion = async () => {
               Choice Two
             </label>
             <div class="flex gap-x-6 items-center">
-              <input v-model="choicesFormData.choice_text_2"
+              <input v-model="formData.choices[1]"
                 className="mb-3  min-w-[280px] md:w-[500px] w-[80%] xl:w-[600px] block  appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                 id="choice_text_2" name="choice_text" type="text" />
-              <div @click="correctChoice = 2"
+              <div @click="formData.correct_choice = formData.choices[1]"
                 class="py-2 px-3 border border-gray-500 rounded-md cursor-pointer hover:bg-bg-light-green" :class="{
-                  'bg-bg-light-green': correctChoice === 2,
+                  'bg-bg-light-green': formData.correct_choice === formData.choices[1],
                 }">Correct
               </div>
             </div>
-            <p v-if="ChoiceErrors.is_correct" class="text-sm text-red-500">
-              {{ ChoiceErrors.is_correct }}
+            <p v-if="errors.choices" class="text-sm text-red-500">
+              {{ errors.choices[0] }}
             </p>
           </div>
           <div className=" ">
@@ -293,17 +272,17 @@ const handleCreateQuestion = async () => {
               Choice Three
             </label>
             <div class="flex gap-x-6 items-center">
-              <input v-model="choicesFormData.choice_text_3"
+              <input v-model="formData.choices[2]"
                 className="mb-3  min-w-[280px] md:w-[500px] w-[80%] xl:w-[600px] block  appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                 id="choice_text_3" name="choice_text" type="text" />
-              <div @click="correctChoice = 3"
+              <div @click="formData.correct_choice = formData.choices[2]"
                 class="py-2 px-3 border border-gray-500 rounded-md cursor-pointer hover:bg-bg-light-green" :class="{
-                  'bg-bg-light-green': correctChoice === 3,
+                  'bg-bg-light-green': formData.correct_choice === formData.choices[2]
                 }">Correct
               </div>
             </div>
-            <p v-if="ChoiceErrors.is_correct" class="text-sm text-red-500">
-              {{ ChoiceErrors.is_correct }}
+            <p v-if="errors.choices" class="text-sm text-red-500">
+              {{ errors.choices[0] }}
             </p>
           </div>
           <div className=" ">
@@ -312,17 +291,17 @@ const handleCreateQuestion = async () => {
               Choice Four
             </label>
             <div class="flex gap-x-6 items-center">
-              <input v-model="choicesFormData.choice_text_4"
+              <input v-model="formData.choices[3]"
                 className="mb-3  min-w-[280px] md:w-[500px] w-[80%] xl:w-[600px] block  appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                 id="choice_text_4" name="choice_text" type="text" />
-              <div @click="correctChoice = 4"
+              <div @click="formData.correct_choice = formData.choices[3]"
                 class="py-2 px-3 border border-gray-500 rounded-md cursor-pointer hover:bg-bg-light-green" :class="{
-                  'bg-bg-light-green': correctChoice === 4,
+                  'bg-bg-light-green': formData.correct_choice === formData.choices[3]
                 }">Correct
               </div>
             </div>
-            <p v-if="ChoiceErrors.is_correct" class="text-sm text-red-500">
-              {{ ChoiceErrors.is_correct }}
+            <p v-if="errors.choices" class="text-sm text-red-500">
+              {{ errors.choices[0] }}
             </p>
           </div>
 

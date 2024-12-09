@@ -10,7 +10,16 @@ class Question extends Model
     /** @use HasFactory<\Database\Factories\QuestionFactory> */
     use HasFactory;
 
-    protected $fillable = ['question_text', 'created_by', 'course_id',];
+    protected $fillable =  [
+        'question_text',
+        'choice_1',
+        'choice_2',
+        'choice_3',
+        'choice_4',
+        'correct_choice',
+        'created_by',
+        'course_id',
+    ];
 
     public function creator()
     {
@@ -21,12 +30,6 @@ class Question extends Model
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
-
-    public function choices()
-    {
-        return $this->hasMany(Choice::class);
-    }
-
 
 
     public function notes()

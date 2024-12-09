@@ -19,6 +19,7 @@ const course = ref(null);
 const route = useRoute();
 onMounted(async () => {
   course.value = await getCourse(route.params.id);
+  console.log(course.value);
 });
 
 const indexToChar = (index) => {
@@ -198,12 +199,33 @@ const updateCourse = async () => {
                 </DisclosureButton>
 
                 <DisclosurePanel class="">
-                  <div class="divide-bg-light-green divide-y">
-                    <div v-for="(choice, index) in question.choices" class="px-4  pb-2 pt-4 text-sm text-gray-500"
-                      :class="choice.is_correct ? `bg-bg-light-green` : ``">
+                  <div class="divide-bg-light-green divide-y mt-2">
+                    <div class="px-4  pb-2 pt-4 text-sm text-gray-500"
+                      :class="question.choice_1 === question.correct_choice ? `bg-bg-light-green` : ``">
                       <p>
                         <span class="">{{ indexToChar(index) }} . </span>
-                        {{ choice.choice_text }}
+                        {{ question.choice_1 }}
+                      </p>
+                    </div>
+                    <div class="px-4  pb-2 pt-4 text-sm text-gray-500"
+                      :class="question.choice_2 === question.correct_choice ? `bg-bg-light-green` : ``">
+                      <p>
+                        <span class="">{{ indexToChar(index) }} . </span>
+                        {{ question.choice_2 }}
+                      </p>
+                    </div>
+                    <div class="px-4  pb-2 pt-4 text-sm text-gray-500"
+                      :class="question.choice_3 === question.correct_choice ? `bg-bg-light-green` : ``">
+                      <p>
+                        <span class="">{{ indexToChar(index) }} . </span>
+                        {{ question.choice_3 }}
+                      </p>
+                    </div>
+                    <div class="px-4  pb-2 pt-4 text-sm text-gray-500"
+                      :class="question.choice_4 === question.correct_choice ? `bg-bg-light-green` : ``">
+                      <p>
+                        <span class="">{{ indexToChar(index) }} . </span>
+                        {{ question.choice_4 }}
                       </p>
                     </div>
                   </div>
