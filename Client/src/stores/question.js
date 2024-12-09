@@ -34,7 +34,7 @@ export const useQuestionStore = defineStore("questionStore", {
 
     /*********************  Create Questions ********************** */
 
-    async deleteQuestion(question, routeId) {
+    async deleteQuestion(question) {
       const res = await fetch(`/api/questions/${question}`, {
         method: 'DELETE',
         headers: {
@@ -46,11 +46,7 @@ export const useQuestionStore = defineStore("questionStore", {
         this.errors = data.errors;
       } else {
         this.errors = {};
-        console.log(routeId);
-        this.router.push({
-          name: "AdminCoursePage",
-          params: { id: routeId }
-        })
+        // console.log(routeId);
         return data;
       }
 
