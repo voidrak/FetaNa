@@ -32,7 +32,10 @@ export const useQuestionStore = defineStore("questionStore", {
       }
     },
 
-    /*********************  Create Questions ********************** */
+    /*********************  Update Questions ********************** */
+
+
+    /*********************  Delete Questions ********************** */
 
     async deleteQuestion(question) {
       const res = await fetch(`/api/questions/${question}`, {

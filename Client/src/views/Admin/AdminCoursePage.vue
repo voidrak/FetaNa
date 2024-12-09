@@ -77,18 +77,16 @@ const updateCourse = async () => {
 <template>
   <AdminLayout>
     <div class="px-2 sm:py-4 md:py-8">
-      <DeleteCourseModal @closeDeleteModal="closeDeleteModal" @openDeleteModal="openDeleteModal"
-        :isDeleteOpen="isDeleteOpen" :course_id="course?.id" :program_id="course?.program_id" />
-      <EditCourseModal @closeEditModal="closeEditModal" @openEditModal="openEditModal" :isEditOpen="isEditOpen"
-        :course_id="course?.id" :courseName="course?.name" :program_id="course?.program_id" />
-
-
-
-      <EditQuestionModal @closeEditQuestionModal="closeEditQuestionModal" @openEditQuestionModal="openEditQuestionModal"
-        :isEditQuestionOpen="isEditQuestionOpen" :course_id="course?.id" :courseName="course?.name"
+      <DeleteCourseModal @closeDeleteModal="closeDeleteModal" :isDeleteOpen="isDeleteOpen" :course_id="course?.id"
         :program_id="course?.program_id" />
-      <DeleteQuestionModal @closeDeleteQuestionModal="closeDeleteQuestionModal"
-        @openDeleteQuestionModal="openDeleteQuestionModal" @updateCourse="updateCourse"
+      <EditCourseModal @closeEditModal="closeEditModal" :isEditOpen="isEditOpen" :course_id="course?.id"
+        :courseName="course?.name" :program_id="course?.program_id" />
+
+
+
+      <EditQuestionModal @closeEditQuestionModal="closeEditQuestionModal" :isEditQuestionOpen="isEditQuestionOpen"
+        :course_id="course?.id" :courseName="course?.name" :program_id="course?.program_id" />
+      <DeleteQuestionModal @closeDeleteQuestionModal="closeDeleteQuestionModal" @updateCourse="updateCourse"
         :isDeleteQuestionOpen="isDeleteQuestionOpen" :question_id="selectedQuestionId" />
 
 
