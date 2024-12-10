@@ -18,6 +18,7 @@ class QuestionController extends Controller
         $validated = $request->validate([
             "question_text" => [
                 'required',
+                "string",
                 Rule::unique('questions')->where(function ($query) use ($request) {
                     return $query->where('course_id', $request->course_id);
                 }),
@@ -48,15 +49,42 @@ class QuestionController extends Controller
         return $request->user()->questions()->create($validated);
     }
 
-    public function show(Question $question)
-    {
-        //
-    }
-
     public function update(Request $request, Question $question)
     {
-        //
+
+        $validated = $request->validate([
+            "question_text" => [
+                "required",
+                "string",
+                Rule::unique('questions')->where(function ($query) use ($question) {
+                    return $query->where("course_id", $question->course_id);
+                })->ignore($question->id)
+            ],
+            "choices" => [
+                'required',
+                'array',
+                'min:4',
+                'max:4',
+                function ($attribute, $value, $fail) {
+                    if (count($value) !== count(array_unique($value))) {
+                        $fail("The Choices Must Be Unique");
+                    }
+                }
+            ],
+            "choice.*" => "required | string",
+            "correct_choice" => "required | string | in:" . implode(',', $request->choices)
+        ]);
+
+        $validated['choice_1'] = $request->choices[0];
+        $validated['choice_2'] = $request->choices[1];
+        $validated['choice_3'] = $request->choices[2];
+        $validated['choice_4'] = $request->choices[3];
+
+        return $question->update($validated);
     }
+
+    public function show(Question $question) {}
+
 
     public function destroy(Question $question)
     {
