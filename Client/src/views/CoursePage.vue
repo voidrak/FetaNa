@@ -20,6 +20,7 @@ const solved = reactive([])
 
 onMounted(async () => {
   course.value = await getCourse(route.params.id);
+  // console.log(course.value);
 });
 
 const nextQuestion = () => {
@@ -51,18 +52,19 @@ const isQuestionSolved = (question_id) => {
   return solved.some(solvedItem => solvedItem.question_id === question_id)
 }
 
-const handleCheck = (choice) => {
-  selected.value = choice.id;
+const handleCheck = (choice, correct_answer) => {
+  selected.value = choice;
   questionSolved.value = true
-  if (choice.is_correct) {
+  if (correct_answer === choice) {
     styleOption.value = "select"
-  } else if (!choice.is_correct) {
+  } else if (choice !== correct_answer) {
     styleOption.value = "wrong"
   }
 
-  solved.push({ question_id: course.value.questions[questionIndex.value].id, choice_id: choice.id });
 
+  solved.push({ question_id: course.value.questions[questionIndex.value].id, choice: choice });
 
+  console.log(solved);
 
 
 };
@@ -145,22 +147,72 @@ watch([course, questionIndex], ([newCourse, newQuestionIndex]) => {
               <span class="">{{ questionIndex + 1 }} . </span>
               {{ course.questions[questionIndex].question_text }}?
             </h1>
-            <div v-for="(choice, index) in course.questions[questionIndex].choices"
-              class="mt-4 space-y-4 px-4 lg:text-xl">
-              <button @click=" handleCheck(choice)" class="flex w-full  p-2 gap-x-4 group" :class="{
-                'bg-bg-dark-green': styleOption === 'select' && selected == choice.id,
-                'bg-red-500': styleOption === 'wrong' && selected == choice.id,
-                'bg-bg-light-green': choice.is_correct && questionSolved,
-                'bg-red-400': !choice.is_correct && questionSolved && currentSolvedQuestion?.choice_id === choice.id,
-              }
-                " :disabled="questionSolved">
+            <div class="mt-4 space-y-4 px-4 lg:text-xl">
+              <button
+                @click=" handleCheck(course.questions[questionIndex].choice_1, course.questions[questionIndex].correct_choice)"
+                class="flex w-full  p-2 gap-x-4 group" :class="{
+                  'bg-bg-dark-green': styleOption === 'select' && selected == course.questions[questionIndex].choice_1 && questionSolved,
+                  'bg-red-500': styleOption === 'wrong' && selected == course.questions[questionIndex].choice_1,
+                  'bg-bg-light-green': course.questions[questionIndex].correct_choice === course.questions[questionIndex].choice_1 && questionSolved,
+                  'bg-red-400': course.questions[questionIndex].choice_1 !== course.questions[questionIndex].correct_choice && questionSolved && currentSolvedQuestion?.choice === course.questions[questionIndex].choice_1,
+                }
+                  " :disabled="questionSolved">
                 <div
                   class="mt-1 max-h-4 min-h-4 min-w-4 max-w-4 rounded-full border-2 border-gray-500 bg-transparent group-hover:bg-bg-light-green   ">
                 </div>
                 <p class="">
-                  {{ choice.choice_text }}
+                  {{ course.questions[questionIndex].choice_1 }}
                 </p>
               </button>
+              <button
+                @click=" handleCheck(course.questions[questionIndex].choice_2, course.questions[questionIndex].correct_choice)"
+                class="flex w-full  p-2 gap-x-4 group" :class="{
+                  'bg-bg-dark-green': styleOption === 'select' && selected == course.questions[questionIndex].choice_2 && questionSolved,
+                  'bg-red-500': styleOption === 'wrong' && selected == course.questions[questionIndex].choice_2,
+                  'bg-bg-light-green': course.questions[questionIndex].correct_choice === course.questions[questionIndex].choice_2 && questionSolved,
+                  'bg-red-400': course.questions[questionIndex].choice_2 !== course.questions[questionIndex].correct_choice && questionSolved && currentSolvedQuestion?.choice === course.questions[questionIndex].choice_2,
+                }
+                  " :disabled="questionSolved">
+                <div
+                  class="mt-1 max-h-4 min-h-4 min-w-4 max-w-4 rounded-full border-2 border-gray-500 bg-transparent group-hover:bg-bg-light-green   ">
+                </div>
+                <p class="">
+                  {{ course.questions[questionIndex].choice_2 }}
+                </p>
+              </button>
+              <button
+                @click=" handleCheck(course.questions[questionIndex].choice_3, course.questions[questionIndex].correct_choice)"
+                class="flex w-full  p-2 gap-x-4 group" :class="{
+                  'bg-bg-dark-green': styleOption === 'select' && selected == course.questions[questionIndex].choice_3 && questionSolved,
+                  'bg-red-500': styleOption === 'wrong' && selected == course.questions[questionIndex].choice_3,
+                  'bg-bg-light-green': course.questions[questionIndex].correct_choice === course.questions[questionIndex].choice_3 && questionSolved,
+                  'bg-red-400': course.questions[questionIndex].choice_3 !== course.questions[questionIndex].correct_choice && questionSolved && currentSolvedQuestion?.choice === course.questions[questionIndex].choice_3,
+                }
+                  " :disabled="questionSolved">
+                <div
+                  class="mt-1 max-h-4 min-h-4 min-w-4 max-w-4 rounded-full border-2 border-gray-500 bg-transparent group-hover:bg-bg-light-green   ">
+                </div>
+                <p class="">
+                  {{ course.questions[questionIndex].choice_3 }}
+                </p>
+              </button>
+              <button
+                @click=" handleCheck(course.questions[questionIndex].choice_4, course.questions[questionIndex].correct_choice)"
+                class="flex w-full  p-2 gap-x-4 group" :class="{
+                  'bg-bg-dark-green': styleOption === 'select' && selected == course.questions[questionIndex].choice_4 && questionSolved,
+                  'bg-red-500': styleOption === 'wrong' && selected == course.questions[questionIndex].choice_4,
+                  'bg-bg-light-green': course.questions[questionIndex].correct_choice === course.questions[questionIndex].choice_4 && questionSolved,
+                  'bg-red-400': course.questions[questionIndex].choice_4 !== course.questions[questionIndex].correct_choice && questionSolved && currentSolvedQuestion?.choice === course.questions[questionIndex].choice_4,
+                }
+                  " :disabled="questionSolved">
+                <div
+                  class="mt-1 max-h-4 min-h-4 min-w-4 max-w-4 rounded-full border-2 border-gray-500 bg-transparent group-hover:bg-bg-light-green   ">
+                </div>
+                <p class="">
+                  {{ course.questions[questionIndex].choice_4 }}
+                </p>
+              </button>
+
             </div>
           </div>
           <div class="my-6 flex justify-around md:mt-10 lg:mt-16">
