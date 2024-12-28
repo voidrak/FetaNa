@@ -36,9 +36,8 @@ Please note that this project is ongoing and not yet finished, with new features
 - **Backend**: Laravel
 - **Frontend**: Vue.js
 - **State Management**: Pinia
-- **Database**: MySQL
-- **Version Control**: Git
-- **Deployment**: (Specify your deployment method here, e.g., Heroku, AWS, etc.)
+- **Database**: Mysqlite
+
 
 ## Installation
 
