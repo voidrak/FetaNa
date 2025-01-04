@@ -55,7 +55,7 @@ To get started with FetaNa, follow these steps:
 
 3. Install backend dependencies:
    ```bash
-   cd backend
+   cd server
    composer install
    ```
 
@@ -74,7 +74,7 @@ To get started with FetaNa, follow these steps:
 
 7. Install frontend dependencies:
    ```bash
-   cd ../frontend
+   cd ../client
    npm install
    ```
 
