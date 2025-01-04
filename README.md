@@ -108,4 +108,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Thank you for checking out FetaNa! I hope it serves as a valuable tool for students preparing for their university exit exams. If you have any questions or feedback, feel free to reach out!
+Thank you for checking out FetaNa! I hope it serves as a valuable tool for students preparing for their university exit exams. If you have any questions or feedback, feel free to reach out and call!
